@@ -212,26 +212,44 @@ public class GameController {
         if(space!= null){
             Heading heading = player.getHeading();
             Space space1 = board.getNeighbour(space,heading);
-            if(space1!=null){
+            if(space1!=null && getPlayerAtPosition(space1) == true){
                 player.setSpace(space1);
+            }
+        }
+    }
+    // Addition - Method to check if there is a player at the position to be checked
+    public boolean getPlayerAtPosition(Space space){
+        if(space.getPlayer() == null){
+            return true;
+        } else { return false;
+    } }
+
+    // TODO Assignment V2
+    public void fastForward(@NotNull Player player) {
+/** moveForward(player);
+moveForward(player);
+**/
+        Space space= player.getSpace();
+        if(space!= null){
+            Heading heading = player.getHeading();
+            Space space1 = board.getNeighbour(space,heading);
+            Space space2 = board.getNeighbour(space1,heading);
+            if(space2!=null && getPlayerAtPosition(space2) == true){
+                player.setSpace(space2);
             }
         }
     }
 
     // TODO Assignment V2
-    public void fastForward(@NotNull Player player) {
-
-    }
-
-    // TODO Assignment V2
     public void turnRight(@NotNull Player player) {
-
-
+        Heading heading = player.getHeading();
+        player.setHeading(heading.prev());
     }
 
     // TODO Assignment V2
     public void turnLeft(@NotNull Player player) {
-
+        Heading heading = player.getHeading();
+        player.setHeading(heading.next());
     }
 
     public boolean moveCards(@NotNull CommandCardField source, @NotNull CommandCardField target) {
