@@ -92,10 +92,18 @@ public class Player extends Subject {
         }
     }
 
+    /**
+     * Returns the position of player on the board.
+     * @return the position
+     */
     public Space getSpace() {
         return space;
     }
 
+    /**
+     * Takes a parameter (a new place) and assigns it to the current place.
+     * @param space the space which changed
+     */
     public void setSpace(Space space) {
         Space oldSpace = this.space;
         if (space != oldSpace &&
@@ -111,10 +119,18 @@ public class Player extends Subject {
         }
     }
 
+    /**
+     * Returns the direction of the player's movement.
+     * @return the direction ( north, east, south, west)
+     */
     public Heading getHeading() {
         return heading;
     }
 
+    /**
+     * Takes a parameter (a new direction) and assigns it to the current direction.
+     * @param heading the heading which changed
+     */
     public void setHeading(@NotNull Heading heading) {
         if (heading != this.heading) {
             this.heading = heading;
