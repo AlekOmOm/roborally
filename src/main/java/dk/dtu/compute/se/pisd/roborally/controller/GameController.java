@@ -28,7 +28,6 @@ import org.jetbrains.annotations.NotNull;
  * ...
  *
  * @author Ekkart Kindler, ekki@dtu.dk
- *
  */
 public class GameController {
 
@@ -44,7 +43,7 @@ public class GameController {
      *
      * @param space the space to which the current player should move
      */
-    public void moveCurrentPlayerToSpace(@NotNull Space space)  {
+    public void moveCurrentPlayerToSpace(@NotNull Space space) {
         // TODO Assignment V1: method should be implemented by the students:
         //   - the current player should be moved to the given space
         //     (if it is free()
@@ -55,12 +54,12 @@ public class GameController {
         //     message needs to be implemented at another place)
 
         Player player = board.getCurrentPlayer();
-        if(space.getPlayer() == null){
+        if (space.getPlayer() == null) {
             player.setSpace(space);
-            if (board.getCurrentPlayer() == board.getPlayer(board.getPlayersNumber()-1)){
+            if (board.getCurrentPlayer() == board.getPlayer(board.getPlayersNumber() - 1)) {
                 board.setCurrentPlayer(board.getPlayer(0));
             } else {
-                board.setCurrentPlayer(board.getPlayer(board.getPlayerNumber(player)+1));
+                board.setCurrentPlayer(board.getPlayer(board.getPlayerNumber(player) + 1));
             }
         }
 
@@ -155,6 +154,10 @@ public class GameController {
                 CommandCard card = currentPlayer.getProgramField(step).getCard();
                 if (card != null) {
                     Command command = card.command;
+                    if(command.isInteractive()){
+                        board.setPhase(Phase.PLAYER_INTERACTION);
+                        return;
+                    }
                     executeCommand(currentPlayer, command);
                 }
                 int nextPlayerNumber = board.getPlayerNumber(currentPlayer) + 1;
@@ -177,6 +180,27 @@ public class GameController {
         } else {
             // this should not happen
             assert false;
+        }
+    }
+
+    public void executeCommandOptionAndContinue(@NotNull Command option) {
+        Player currentPlayer = board.getCurrentPlayer();
+        if (currentPlayer != null && board.getPhase() == Phase.PLAYER_INTERACTION && option != null) {
+            board.setPhase(Phase.ACTIVATION);
+            executeCommand(currentPlayer, option);
+            int nextPlayerNumber = board.getPlayerNumber(currentPlayer) + 1;
+            if (nextPlayerNumber < board.getPlayersNumber()) {
+                board.setCurrentPlayer(board.getPlayer(nextPlayerNumber));
+            } else {
+                int step = board.getStep() + 1;
+                if (step < Player.NO_REGISTERS) {
+                    makeProgramFieldsVisible(step);
+                    board.setStep(step);
+                    board.setCurrentPlayer(board.getPlayer(0));
+                } else {
+                    startProgrammingPhase();
+                }
+            }
         }
     }
 
@@ -208,36 +232,40 @@ public class GameController {
 
     // TODO Assignment V2
     public void moveForward(@NotNull Player player) {
-        Space space= player.getSpace();
-        if(space!= null){
+        Space space = player.getSpace();
+        if (space != null) {
             Heading heading = player.getHeading();
-            Space space1 = board.getNeighbour(space,heading);
-            if(space1!=null && getPlayerAtPosition(space1) == true){
+            Space space1 = board.getNeighbour(space, heading);
+            if (space1 != null && getPlayerAtPosition(space1) == true) {
                 player.setSpace(space1);
             }
         }
     }
+
     // Addition - Method to check if there is a player at the position to be checked
-    public boolean getPlayerAtPosition(Space space){
-        if(space.getPlayer() == null){
+    public boolean getPlayerAtPosition(Space space) {
+        if (space.getPlayer() == null) {
             return true;
-        } else { return false;
-    } }
+        } else {
+            return false;
+        }
+    }
 
     // TODO Assignment V2
     public void fastForward(@NotNull Player player) {
-/** moveForward(player);
-moveForward(player);
-**/
-        Space space= player.getSpace();
-        if(space!= null){
+
+ moveForward(player);
+ moveForward(player);
+ /*
+        Space space = player.getSpace();
+        if (space != null) {
             Heading heading = player.getHeading();
-            Space space1 = board.getNeighbour(space,heading);
-            Space space2 = board.getNeighbour(space1,heading);
-            if(space2!=null && getPlayerAtPosition(space2) == true){
+            Space space1 = board.getNeighbour(space, heading);
+            Space space2 = board.getNeighbour(space1, heading);
+            if (space2 != null && getPlayerAtPosition(space2) == true) {
                 player.setSpace(space2);
             }
-        }
+        }*/
     }
 
     // TODO Assignment V2
