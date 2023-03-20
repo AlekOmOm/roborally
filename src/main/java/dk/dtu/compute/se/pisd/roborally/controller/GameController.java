@@ -154,7 +154,7 @@ public class GameController {
                 CommandCard card = currentPlayer.getProgramField(step).getCard();
                 if (card != null) {
                     Command command = card.command;
-                    if(command.isInteractive()){
+                    if (command.isInteractive()) {
                         board.setPhase(Phase.PLAYER_INTERACTION);
                         return;
                     }
@@ -202,6 +202,7 @@ public class GameController {
                 }
             }
         }
+        continuePrograms();
     }
 
     // XXX: V2
@@ -224,6 +225,12 @@ public class GameController {
                 case FAST_FORWARD:
                     this.fastForward(player);
                     break;
+                case STEP_BACK:
+                    this.stepBack(player);
+                    break;
+                case U_TURN:
+                    this.uTurn(player);
+                    break;
                 default:
                     // DO NOTHING (for now)
             }
@@ -231,31 +238,46 @@ public class GameController {
     }
 
     // TODO Assignment V2
+
     public void moveForward(@NotNull Player player) {
-        Space space = player.getSpace();
-        if (space != null) {
+        if (player.board == board) {
+            Space space = player.getSpace();
             Heading heading = player.getHeading();
-            Space space1 = board.getNeighbour(space, heading);
-            if (space1 != null && getPlayerAtPosition(space1) == true) {
-                player.setSpace(space1);
+            Space target = board.getNeighbour(space, heading);
+
+            if (target != null) {
+                moveToSpace(player, target, heading);
             }
         }
     }
+/**
+ * This method is used to check the new space before the current player moves.
+ */
+    private boolean moveToSpace(Player player, Space target, Heading heading) {
+        if (target.getPlayer() != null) {
+            Space other = board.getNeighbour(target, heading);
+           boolean result = moveToSpace(target.getPlayer(), other, heading);
 
-    // Addition - Method to check if there is a player at the position to be checked
-    public boolean getPlayerAtPosition(Space space) {
-        if (space.getPlayer() == null) {
-            return true;
-        } else {
-            return false;
+            if(result==true){
+                    player.setSpace(target);
+                return true;
+            }else {
+                return false;
+            }
+        } else{
+        player.setSpace(target);
+        return true;
         }
+
     }
+
+
 
     // TODO Assignment V2
     public void fastForward(@NotNull Player player) {
 
- moveForward(player);
- moveForward(player);
+        moveForward(player);
+        moveForward(player);
  /*
         Space space = player.getSpace();
         if (space != null) {
@@ -271,13 +293,32 @@ public class GameController {
     // TODO Assignment V2
     public void turnRight(@NotNull Player player) {
         Heading heading = player.getHeading();
-        player.setHeading(heading.prev());
+        player.setHeading(heading.next());
     }
 
     // TODO Assignment V2
     public void turnLeft(@NotNull Player player) {
         Heading heading = player.getHeading();
-        player.setHeading(heading.next());
+        player.setHeading(heading.prev());
+    }
+    // TODO Assignment A3
+    public void stepBack(@NotNull Player player) {
+        if (player.board == board) {
+            Space space = player.getSpace();
+            Heading heading = player.getHeading();
+            Heading oppositi = heading.next().next();
+            Space target = board.getNeighbour(space, oppositi);
+
+            if (target != null) {
+                moveToSpace(player, target, oppositi);
+            }
+        }
+
+    }
+    // TODO Assignment A3
+    public void uTurn(@NotNull Player player){
+        Heading heading = player.getHeading();
+        player.setHeading(heading.next().next());
     }
 
     public boolean moveCards(@NotNull CommandCardField source, @NotNull CommandCardField target) {

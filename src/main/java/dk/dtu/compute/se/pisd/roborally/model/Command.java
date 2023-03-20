@@ -41,8 +41,11 @@ public enum Command {
     FAST_FORWARD("Fast Fwd"),
 
     // XXX Assignment V3 (step 1)
-    OPTION_LEFT_RIGHT("Left OR Right", LEFT, RIGHT);
-
+    OPTION_LEFT_RIGHT("Left OR Right", LEFT, RIGHT),
+    // XXX Assigment A3
+    STEP_BACK("Back"),
+    OPTION_FORWARD_BACK("Forward OR Back", FORWARD, STEP_BACK),
+    U_TURN("U Turn");
     final public String displayName;
 
     // XXX Assignment V3 (step 1)
