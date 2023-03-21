@@ -254,10 +254,13 @@ public class GameController {
  * This method is used to check the new space before the current player moves.
  */
     private boolean moveToSpace(Player player, Space target, Heading heading) {
-        if (target.getPlayer() != null) {
+        if (target.getPlayer() == null && checkWall(player,target,heading)) {
+            player.setSpace(target);
+            return true;
+        } else if (target.getPlayer() != null && checkWall(player,target,heading) && checkWall(target.getPlayer(),board.getNeighbour(target,heading),heading)){
             Space other = board.getNeighbour(target, heading);
+            checkWall(player,target,heading);
            boolean result = moveToSpace(target.getPlayer(), other, heading);
-
             if(result==true){
                     player.setSpace(target);
                 return true;
@@ -268,10 +271,27 @@ public class GameController {
         player.setSpace(target);
         return true;
         }
-
     }
 
+    private boolean checkWall(Player player,Space space,Heading heading) {
+        if (player.getSpace().getWall() != null) {
+            if (player.getSpace().getWall().getHeading() != player.getHeading()) {
+                Space other = board.getNeighbour(space, heading);
+                if (other.getWall() != null) {
+                    if (player.getHeading() == Heading.WEST && other.getWall().getHeading() != Heading.EAST) {
+                        return true;
+                    } else if (player.getHeading() == Heading.NORTH && other.getWall().getHeading() != Heading.SOUTH) {
+                        return true;
+                    } else if (player.getHeading() == Heading.EAST && other.getWall().getHeading() != Heading.WEST) {
+                        return true;
+                    } else if (player.getHeading() == Heading.SOUTH && other.getWall().getHeading() != Heading.NORTH) {
+                        return true;
+                    }
+                }
+            }
 
+        } return false;
+    }
 
     // TODO Assignment V2
     public void fastForward(@NotNull Player player) {

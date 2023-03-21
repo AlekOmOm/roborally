@@ -37,12 +37,13 @@ public class Space extends Subject {
     public final int y;
 
     private Player player;
-
+    private Wall wall;
     public Space(Board board, int x, int y) {
         this.board = board;
         this.x = x;
         this.y = y;
         player = null;
+        wall = null;
     }
 
     public Player getPlayer() {
@@ -63,6 +64,12 @@ public class Space extends Subject {
             }
             notifyChange();
         }
+    }
+    public Wall getWall() {
+        return wall;
+    }
+    public void setWall(Wall wall) {
+        this.wall = wall;
     }
 
     void playerChanged() {

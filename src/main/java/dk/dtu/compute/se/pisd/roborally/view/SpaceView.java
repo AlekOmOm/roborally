@@ -22,11 +22,9 @@
 package dk.dtu.compute.se.pisd.roborally.view;
 
 import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
+import dk.dtu.compute.se.pisd.roborally.controller.AppController;
 import dk.dtu.compute.se.pisd.roborally.controller.GameController;
-import dk.dtu.compute.se.pisd.roborally.model.Board;
-import dk.dtu.compute.se.pisd.roborally.model.Heading;
-import dk.dtu.compute.se.pisd.roborally.model.Player;
-import dk.dtu.compute.se.pisd.roborally.model.Space;
+import dk.dtu.compute.se.pisd.roborally.model.*;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.Pane;
@@ -81,7 +79,7 @@ public class SpaceView extends StackPane implements ViewObserver {
     }
 
     private void updatePlayer() {
-        this.getChildren().clear();
+
 
         Player player = space.getPlayer();
         if (player != null) {
@@ -98,26 +96,42 @@ public class SpaceView extends StackPane implements ViewObserver {
             this.getChildren().add(arrow);
         }
 
+
     }
 
     @Override
     public void updateView(Subject subject) {
         if (subject == this.space) {
+            this.getChildren().clear();
             updatePlayer();
+           //createWall();
+            updateWall();
         }
-       //createWall();
     }
-    public void createWall(@NotNull Space space) {
-        Canvas canvas =
-                new Canvas(SPACE_WIDTH, SPACE_HEIGHT);
-        GraphicsContext gc =
-                canvas.getGraphicsContext2D();
-        gc.setStroke(Color.RED);
-        gc.setLineWidth(5);
-        gc.setLineCap(StrokeLineCap.ROUND);
-        gc.strokeLine(2, SPACE_HEIGHT - 2,
-                SPACE_WIDTH - 2, SPACE_HEIGHT - 2);
-        this.getChildren().add(canvas);
+    public void updateWall() {
+
+        Wall wall = space.getWall();
+
+        if (wall != null) {
+            Pane pane = new Pane();
+            Line line;
+          switch(wall.getHeading()){
+              case EAST -> line =new Line(SPACE_WIDTH-2, 2, SPACE_WIDTH-2,SPACE_HEIGHT-2);
+              case NORTH -> line =new Line (2,2,SPACE_WIDTH-2,2);
+              case WEST -> line =new Line(2,2,2,SPACE_HEIGHT-2);
+              default -> line =new Line(2,SPACE_HEIGHT-2,SPACE_WIDTH-2,SPACE_HEIGHT-2);
+
+            }
+            line.setStroke(Color.RED);
+            line.setStrokeWidth(5);
+            pane.getChildren().add(line);
+            this.getChildren().add(pane);
+        }
+        //createWall();
     }
 
-}
+    }
+
+
+
+

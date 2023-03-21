@@ -29,16 +29,28 @@ import dk.dtu.compute.se.pisd.roborally.RoboRally;
 import dk.dtu.compute.se.pisd.roborally.model.Board;
 import dk.dtu.compute.se.pisd.roborally.model.Player;
 
+import dk.dtu.compute.se.pisd.roborally.model.Wall;
 import javafx.application.Platform;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceDialog;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.StrokeLineCap;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
+
+import static dk.dtu.compute.se.pisd.roborally.view.SpaceView.SPACE_HEIGHT;
+import static dk.dtu.compute.se.pisd.roborally.view.SpaceView.SPACE_WIDTH;
 
 /**
  * ...
@@ -84,6 +96,16 @@ public class AppController implements Observer {
                 board.addPlayer(player);
                 player.setSpace(board.getSpace(i % board.width, i));
             }
+            for(int i =0; i<2;i++) {
+                Wall wall1 = new Wall(board);
+                board.addWall(wall1);
+                Random random =new Random();
+                int rand1  = random.nextInt(8);
+                int rand2  = random.nextInt(8);
+                System.out.println("1: " + rand1 + "2: " + rand2);
+                wall1.setSpace(board.getSpace(rand1, rand2));
+            }
+
 
             // XXX: V2
             // board.setCurrentPlayer(board.getPlayer(0));
@@ -155,5 +177,6 @@ public class AppController implements Observer {
     public void update(Subject subject) {
         // XXX do nothing for now
     }
+
 
 }
