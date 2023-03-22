@@ -164,6 +164,8 @@ public class GameController {
                 if (nextPlayerNumber < board.getPlayersNumber()) {
                     board.setCurrentPlayer(board.getPlayer(nextPlayerNumber));
                 } else {
+                   // --> execute action on fields!
+                    // -> check checkpoint for alle players
                     step++;
                     if (step < Player.NO_REGISTERS) {
                         makeProgramFieldsVisible(step);
@@ -259,9 +261,9 @@ public class GameController {
             return true;
         } else if (target.getPlayer() != null && checkWall(player,target,heading) && checkWall(target.getPlayer(),board.getNeighbour(target,heading),heading)){
             Space other = board.getNeighbour(target, heading);
-            checkWall(player,target,heading);
-           boolean result = moveToSpace(target.getPlayer(), other, heading);
-            if(result==true){
+            boolean result= checkWall(player,target,heading);
+           boolean result1 = moveToSpace(target.getPlayer(), other, heading);
+            if(result!=true && result1==true){
                     player.setSpace(target);
                 return true;
             }else {

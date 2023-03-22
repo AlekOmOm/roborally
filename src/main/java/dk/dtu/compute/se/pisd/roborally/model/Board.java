@@ -217,6 +217,7 @@ public class Board extends Subject {
         switch (heading) {
             case SOUTH:
                 y = (y + 1) % height;
+
                 break;
             case WEST:
                 x = (x + width - 1) % width;
