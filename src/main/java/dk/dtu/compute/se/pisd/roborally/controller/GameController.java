@@ -248,7 +248,7 @@ public class GameController {
             Space target = board.getNeighbour(space, heading);
 
             if (target != null) {
-                moveToSpace(player, target, heading);
+                moveToSpace(player,target,heading);
             }
         }
     }
@@ -295,21 +295,47 @@ public class GameController {
         } return false;
     }
 
+/*void moveToSpace() throws ImpossibleMoveException {
+    assert board.getNeighbour(player.getSpace(), heading) == space; // make sure the move to here is possible in principle
+    Player other = space.getPlayer();
+    if (other != null){
+        Space target = board.getNeighbour(space, heading);
+        if (target != null) {
+            // XXX Note that there might be additional problems with
+            //     infinite recursion here (in some special cases)!
+            //     We will come back to that!
+            moveToSpace();
+
+            // Note that we do NOT embed the above statement in a try catch block, since
+            // the thrown exception is supposed to be passed on to the caller
+
+            assert target.getPlayer() == null : target; // make sure target is free now
+        } else {
+            throw new ImpossibleMoveException(player, space, heading);
+        }
+    }
+    player.setSpace(space);
+}
+    class ImpossibleMoveException extends Exception {
+
+        private Player player;
+        private Space space;
+        private Heading heading;
+
+        public ImpossibleMoveException(Player player, Space space, Heading heading) {
+            super("Move impossible");
+            this.player = player;
+            this.space = space;
+            this.heading = heading;
+        }
+    }
+
+ */
     // TODO Assignment V2
     public void fastForward(@NotNull Player player) {
+        moveForward(player);
+        moveForward(player);
 
-        moveForward(player);
-        moveForward(player);
- /*
-        Space space = player.getSpace();
-        if (space != null) {
-            Heading heading = player.getHeading();
-            Space space1 = board.getNeighbour(space, heading);
-            Space space2 = board.getNeighbour(space1, heading);
-            if (space2 != null && getPlayerAtPosition(space2) == true) {
-                player.setSpace(space2);
-            }
-        }*/
     }
 
     // TODO Assignment V2
@@ -328,11 +354,11 @@ public class GameController {
         if (player.board == board) {
             Space space = player.getSpace();
             Heading heading = player.getHeading();
-            Heading oppositi = heading.next().next();
-            Space target = board.getNeighbour(space, oppositi);
+            Heading opposite = heading.next().next();
+            Space target = board.getNeighbour(space, opposite);
 
             if (target != null) {
-                moveToSpace(player, target, oppositi);
+                moveToSpace(player,target,heading);
             }
         }
 
