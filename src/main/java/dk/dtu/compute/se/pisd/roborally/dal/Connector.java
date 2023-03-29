@@ -40,8 +40,8 @@ class Connector {
     private static final String HOST     = "localhost";
     private static final int    PORT     = 3306;
     private static final String DATABASE = "pisu";
-    private static final String USERNAME = "user";
-    private static final String PASSWORD = "";
+    private static final String USERNAME = UserNamesAndPasswords.DB_USER;
+    private static final String PASSWORD = UserNamesAndPasswords.DB_PWD;
 
     private static final String DELIMITER = ";;";
 
@@ -50,7 +50,8 @@ class Connector {
     Connector() {
         try {
             // String url = "jdbc:mysql://" + HOST + ":" + PORT + "/" + DATABASE;
-            String url = "jdbc:mysql://" + HOST + ":" + PORT + "/" + DATABASE + "?serverTimezone=UTC";
+            // String url = "jdbc:mysql://" + HOST + ":" + PORT + "/" + DATABASE + "?serverTimezone=UTC";
+            String url = "jdbc:mariadb://" + HOST + ":" + PORT + "/" + DATABASE;
             connection = DriverManager.getConnection(url, USERNAME, PASSWORD);
 
             createDatabaseSchema();
