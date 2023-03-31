@@ -25,6 +25,7 @@ import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
 import dk.dtu.compute.se.pisd.roborally.controller.FieldAction;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -43,13 +44,12 @@ public class Space extends Subject {
     private Player player;
     private List<Heading> walls = new ArrayList<>();
     private List<FieldAction> actions = new ArrayList<>();
-    private Wall wall;
+
     public Space(Board board, int x, int y) {
         this.board = board;
         this.x = x;
         this.y = y;
         player = null;
-        wall = null;
     }
 
     public Player getPlayer() {
@@ -71,12 +71,7 @@ public class Space extends Subject {
             notifyChange();
         }
     }
-    public Wall getWall() {
-        return wall;
-    }
-    public void setWall(Wall wall) {
-        this.wall = wall;
-    }
+
 
     public List<Heading> getWalls() {
         return walls;
@@ -92,5 +87,9 @@ public class Space extends Subject {
         notifyChange();
     }
 
-
+    public void addWall(Heading heading) {
+        if (!walls.contains(heading)) {
+            this.walls.add(heading);
+        }
+    }
 }

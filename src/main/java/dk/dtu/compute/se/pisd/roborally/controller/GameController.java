@@ -270,13 +270,12 @@ public class GameController {
                 return false;
             }
         } else{
-        player.setSpace(target);
         return true;
         }
     }
 
     private boolean checkWall(Player player,Space space,Heading heading) {
-        if (player.getSpace().getWall() != null) {
+        /*if (player.getSpace().getWall() != null) {
             if (player.getSpace().getWall().getHeading() != player.getHeading()) {
                 Space other = board.getNeighbour(space, heading);
                 if (other.getWall() != null) {
@@ -292,7 +291,8 @@ public class GameController {
                 }
             }
 
-        } return false;
+        } */
+        return false;
     }
 
 /*void moveToSpace() throws ImpossibleMoveException {

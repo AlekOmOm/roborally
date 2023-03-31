@@ -2,6 +2,8 @@ package dk.dtu.compute.se.pisd.roborally.controller;
 
 import dk.dtu.compute.se.pisd.roborally.model.Space;
 
+import java.awt.*;
+
 public abstract class FieldAction {
     /**
      * Executes the field action for a given space. In order to be able to do
@@ -13,3 +15,5 @@ public abstract class FieldAction {
      */
     public abstract boolean doAction(GameController gameController, Space space);
 }
+
+

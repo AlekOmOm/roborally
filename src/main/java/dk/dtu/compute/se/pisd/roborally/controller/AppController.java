@@ -27,22 +27,26 @@ import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
 import dk.dtu.compute.se.pisd.roborally.RoboRally;
 
 import dk.dtu.compute.se.pisd.roborally.dal.RepositoryAccess;
-import dk.dtu.compute.se.pisd.roborally.model.Board;
-import dk.dtu.compute.se.pisd.roborally.model.Player;
+import dk.dtu.compute.se.pisd.roborally.fileaccess.LoadBoard;
+import dk.dtu.compute.se.pisd.roborally.model.*;
 
-import dk.dtu.compute.se.pisd.roborally.model.Wall;
+import dk.dtu.compute.se.pisd.roborally.view.RoboRallyMenuBar;
 import javafx.application.Platform;
+import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceDialog;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.StrokeLineCap;
+import javafx.stage.Stage;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
@@ -50,6 +54,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
+import static dk.dtu.compute.se.pisd.roborally.fileaccess.LoadBoard.saveBoard;
+import static dk.dtu.compute.se.pisd.roborally.fileaccess.LoadBoard.saveCommandCard;
 import static dk.dtu.compute.se.pisd.roborally.view.SpaceView.SPACE_HEIGHT;
 import static dk.dtu.compute.se.pisd.roborally.view.SpaceView.SPACE_WIDTH;
 
@@ -60,17 +66,21 @@ import static dk.dtu.compute.se.pisd.roborally.view.SpaceView.SPACE_WIDTH;
  *
  */
 public class AppController implements Observer {
-
+    Board board;
+    Command command;
     final private List<Integer> PLAYER_NUMBER_OPTIONS = Arrays.asList(2, 3, 4, 5, 6);
     final private List<String> PLAYER_COLORS = Arrays.asList("red", "green", "blue", "orange", "grey", "magenta");
 
     final private RoboRally roboRally;
 
     private GameController gameController;
+    private BorderPane boardRoot;
+    private Stage stage;
 
     public AppController(@NotNull RoboRally roboRally) {
         this.roboRally = roboRally;
     }
+
 
     public void newGame() {
         ChoiceDialog<Integer> dialog = new ChoiceDialog<>(PLAYER_NUMBER_OPTIONS.get(0), PLAYER_NUMBER_OPTIONS);
@@ -89,7 +99,7 @@ public class AppController implements Observer {
 
             // XXX the board should eventually be created programmatically or loaded from a file
             //     here we just create an empty board with the required number of players.
-            Board board = new Board(8,8);
+            board = new Board(8,8);
             gameController = new GameController(board);
             int no = result.get();
             for (int i = 0; i < no; i++) {
@@ -97,19 +107,10 @@ public class AppController implements Observer {
                 board.addPlayer(player);
                 player.setSpace(board.getSpace(i % board.width, i));
             }
-            for(int i =0; i<2;i++) {
-                Wall wall1 = new Wall(board);
-                board.addWall(wall1);
-                Random random =new Random();
-                int rand1  = random.nextInt(8);
-                int rand2  = random.nextInt(8);
-                System.out.println("1: " + rand1 + "2: " + rand2);
-                wall1.setSpace(board.getSpace(rand1, rand2));
-            }
 
 
-
-
+            Space space = board.getSpace(3,5);
+            space.addWall(Heading.WEST);
             // XXX: V2
             // board.setCurrentPlayer(board.getPlayer(0));
             gameController.startProgrammingPhase();
@@ -122,6 +123,9 @@ public class AppController implements Observer {
 
     public void saveGame() {
         // XXX needs to be implemented eventually
+        LoadBoard loadboard = new LoadBoard();
+        //LoadBoard.saveCommandCard();
+        loadboard.saveBoard(board, "game");
     }
 
     public void loadGame() {

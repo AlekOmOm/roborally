@@ -36,6 +36,8 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.StrokeLineCap;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
 
 
@@ -103,24 +105,22 @@ public class SpaceView extends StackPane implements ViewObserver {
     public void updateView(Subject subject) {
         if (subject == this.space) {
             this.getChildren().clear();
+            updateWall();
             updatePlayer();
            //createWall();
-            updateWall();
+
         }
     }
     public void updateWall() {
-
-        Wall wall = space.getWall();
-
-        if (wall != null) {
+        List<Heading> wallsHeading = space.getWalls();
+        for(Heading wall :wallsHeading){
             Pane pane = new Pane();
-            Line line;
-          switch(wall.getHeading()){
+            Line line = null ;
+          switch(wall){
               case EAST -> line =new Line(SPACE_WIDTH-2, 2, SPACE_WIDTH-2,SPACE_HEIGHT-2);
               case NORTH -> line =new Line (2,2,SPACE_WIDTH-2,2);
               case WEST -> line =new Line(2,2,2,SPACE_HEIGHT-2);
-              default -> line =new Line(2,SPACE_HEIGHT-2,SPACE_WIDTH-2,SPACE_HEIGHT-2);
-
+              case SOUTH  -> line =new Line(2,SPACE_HEIGHT-2,SPACE_WIDTH-2,SPACE_HEIGHT-2);
             }
             line.setStroke(Color.RED);
             line.setStrokeWidth(5);

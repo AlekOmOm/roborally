@@ -24,10 +24,12 @@ public class Wall extends Subject {
         return space;
     }
 
-    public void setSpace(Space space) {
+   /* public void setSpace(Space space) {
         this.space = space;
         space.setWall(this);
     }
+
+    */
     public Heading getHeading() {
         return heading;
     }
