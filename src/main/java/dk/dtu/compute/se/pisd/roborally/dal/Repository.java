@@ -106,7 +106,7 @@ class Repository implements IRepository {
 				createCardFieldsInDB(game);
 				 */
 
-                // since current player is a foreign key, it can oly be
+                // since current player is a foreign key, it can only be
                 // inserted after the players are created, since MySQL does
                 // not have a per transaction validation, but validates on
                 // a per row basis.
