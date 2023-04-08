@@ -49,9 +49,9 @@ class Connector {
 
     Connector() {
         try {
-            // String url = "jdbc:mysql://" + HOST + ":" + PORT + "/" + DATABASE;
+            String url = "jdbc:mysql://" + HOST + ":" + PORT + "/" + DATABASE;
             // String url = "jdbc:mysql://" + HOST + ":" + PORT + "/" + DATABASE + "?serverTimezone=UTC";
-            String url = "jdbc:mariadb://" + HOST + ":" + PORT + "/" + DATABASE;
+            //String url = "jdbc:mariadb://" + HOST + ":" + PORT + "/" + DATABASE;
             connection = DriverManager.getConnection(url, USERNAME, PASSWORD);
 
             createDatabaseSchema();

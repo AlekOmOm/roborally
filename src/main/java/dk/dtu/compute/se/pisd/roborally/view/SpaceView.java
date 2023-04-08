@@ -103,6 +103,7 @@ public class SpaceView extends StackPane implements ViewObserver {
         if (subject == this.space) {
             this.getChildren().clear();
             updateWall();
+            updateCheckpoint();
             updatePlayer();
         }
     }
@@ -122,7 +123,11 @@ public class SpaceView extends StackPane implements ViewObserver {
             pane.getChildren().add(line);
             this.getChildren().add(pane);
         }
-
+    }
+    public void updateCheckpoint(){
+        if(space.getCheckpoint()==true){
+            this.setStyle("-fx-background-color: yellow;");
+        }
     }
 
     }

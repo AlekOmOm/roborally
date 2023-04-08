@@ -102,15 +102,23 @@ public class AppController implements Observer {
             board = new Board(8,8);
             gameController = new GameController(board);
             int no = result.get();
+            Space checkpoint1 = board.getSpace(5,6);
+            checkpoint1.setCheckpoint(true);
+            Space checkpoint2 = board.getSpace(2,3);
+            checkpoint2.setCheckpoint(true);
             for (int i = 0; i < no; i++) {
                 Player player = new Player(board, PLAYER_COLORS.get(i), "Player " + (i + 1));
                 board.addPlayer(player);
                 player.setSpace(board.getSpace(i % board.width, i));
+                player.addCheckpoint(checkpoint1);
+                player.addCheckpoint(checkpoint2);
             }
 
-
+            // V4
             Space space = board.getSpace(3,5);
             space.addWall(Heading.WEST);
+
+
             // XXX: V2
             // board.setCurrentPlayer(board.getPlayer(0));
             gameController.startProgrammingPhase();
@@ -125,7 +133,12 @@ public class AppController implements Observer {
         // XXX needs to be implemented eventually
         LoadBoard loadboard = new LoadBoard();
         //LoadBoard.saveCommandCard();
-        loadboard.saveBoard(board, "game");
+        try {
+            //  Block of code to try
+            loadboard.saveBoard(board, "game");
+        } catch (Exception e) {
+            //  Block of code to handle errors
+        }
     }
 
     public void loadGame() {

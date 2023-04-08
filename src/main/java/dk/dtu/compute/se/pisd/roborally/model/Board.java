@@ -49,7 +49,6 @@ public class Board extends Subject {
     private final Space[][] spaces;
 
     private final List<Player> players = new ArrayList<>();
-    private final List<Wall> walls = new ArrayList<>();
 
     private Player current;
 
@@ -114,12 +113,12 @@ public class Board extends Subject {
             notifyChange();
         }
     }
-    public void addWall(@NotNull Wall wall) {
+    /*public void addWall(@NotNull Wall wall) {
         if (wall.board == this && !walls.contains(wall)) {
             walls.add(wall);
             notifyChange();
         }
-    }
+    }*/
 
     /**
      * Returns the player at position "i" in the array of players

@@ -44,6 +44,7 @@ public class Space extends Subject {
     private Player player;
     private List<Heading> walls = new ArrayList<>();
     private List<FieldAction> actions = new ArrayList<>();
+    boolean  checkpoint;
 
     public Space(Board board, int x, int y) {
         this.board = board;
@@ -92,4 +93,11 @@ public class Space extends Subject {
             this.walls.add(heading);
         }
     }
+    public boolean getCheckpoint(){
+        return checkpoint;
+    }
+    public void setCheckpoint(boolean checkpoint){
+         this.checkpoint = checkpoint;
+    }
+
 }
