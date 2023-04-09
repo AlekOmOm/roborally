@@ -90,5 +90,29 @@ class GameControllerTest {
             gameController.turnLeft(current);
             Assertions.assertEquals(current.getHeading(),before.prev()," ");
         }
+
     }
+
+    @Test
+    void turnRight(){
+        Board board = gameController.board;
+        Player current = board.getCurrentPlayer();
+        for(int i=0; i<=3; i++){
+            Heading before = current.getHeading();
+            gameController.turnRight(current);
+            Assertions.assertEquals(current.getHeading(), before.next(), " ");
+        }
+    }
+
+    @Test
+    void uTurn(){
+        Board board = gameController.board;
+        Player current = board.getCurrentPlayer();
+        for(int i=0; i<=3; i++){
+            Heading before = current.getHeading();
+            gameController.uTurn(current);
+            Assertions.assertEquals(current.getHeading(), before.next().next(), " ");
+        }
+    }
+
 }
