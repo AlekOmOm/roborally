@@ -81,8 +81,6 @@ public class SpaceView extends StackPane implements ViewObserver {
     }
 
     private void updatePlayer() {
-
-
         Player player = space.getPlayer();
         if (player != null) {
             Polygon arrow = new Polygon(0.0, 0.0,
@@ -102,6 +100,7 @@ public class SpaceView extends StackPane implements ViewObserver {
     public void updateView(Subject subject) {
         if (subject == this.space) {
             this.getChildren().clear();
+            updateFelter();
             updateWall();
             updateCheckpoint();
             updatePlayer();
@@ -123,6 +122,24 @@ public class SpaceView extends StackPane implements ViewObserver {
             pane.getChildren().add(line);
             this.getChildren().add(pane);
         }
+    }
+
+    public void updateFelter(){
+        List<Heading> felterHeading = space.getFelter();
+        for(Heading felte : felterHeading){
+            Polygon arrow = new Polygon(0.0, 0.0,
+                    25.0, 50.0,
+                    55.0, 0.0 );
+            try {
+                arrow.setFill(Color.LIGHTGRAY);
+            } catch (Exception e) {
+                arrow.setFill(Color.MEDIUMPURPLE);
+            }
+
+            arrow.setRotate((90*felte.ordinal())%360);
+            this.getChildren().add(arrow);
+        }
+
     }
     public void updateCheckpoint(){
         if(space.getCheckpoint()==true){

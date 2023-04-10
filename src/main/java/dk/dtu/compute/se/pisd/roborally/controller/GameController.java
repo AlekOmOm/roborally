@@ -245,28 +245,30 @@ public class GameController {
             Space space = player.getSpace();
             Heading heading = player.getHeading();
             Space target = board.getNeighbour(space, heading);
-            if (target != null) {
-                moveToSpace(player,target,heading);
-              if(player.getListCheckpoint().peek().equals(target)) {
-                  player.getListCheckpoint().pop();
-                  if(player.getListCheckpoint().isEmpty()){
-                      endGame();
-                  }
-              }
+            if (target!=null) {
+                moveToSpace(player, target, heading);
+                if (player.getListCheckpoint().peek().equals(target)) {
+                    player.getListCheckpoint().pop();
+                    if (player.getListCheckpoint().isEmpty()) {
+                        endGame();
+                    }
+                }
             }
         }
     }
     // todo
     public void endGame(){
 
-        ;
+
     }
 /**
  * This method is used to check the new space before the current player moves.
  */
     private boolean moveToSpace(Player player, Space target, Heading heading) {
-        if(target.getWalls().isEmpty()==false && target.getWalls().contains(heading.next().next())){
+        if(!target.getWalls().isEmpty() && target.getWalls().contains(heading.next().next())){
          return false;
+        }else if (!player.getSpace().getWalls().isEmpty() && player.getSpace().getWalls().contains(heading)) {
+            return false;
         }
         if (target.getPlayer() == null ) {
             player.setSpace(target);
@@ -274,7 +276,7 @@ public class GameController {
         } else if (target.getPlayer() != null ){
             Space other = board.getNeighbour(target, heading);
            boolean result = moveToSpace(target.getPlayer(), other, heading);
-            if(result!=true ){
+            if(result!= false ){
                     player.setSpace(target);
                 return true;
             }else {
@@ -286,43 +288,6 @@ public class GameController {
     }
 
 
-
-/*void moveToSpace() throws ImpossibleMoveException {
-    assert board.getNeighbour(player.getSpace(), heading) == space; // make sure the move to here is possible in principle
-    Player other = space.getPlayer();
-    if (other != null){
-        Space target = board.getNeighbour(space, heading);
-        if (target != null) {
-            // XXX Note that there might be additional problems with
-            //     infinite recursion here (in some special cases)!
-            //     We will come back to that!
-            moveToSpace();
-
-            // Note that we do NOT embed the above statement in a try catch block, since
-            // the thrown exception is supposed to be passed on to the caller
-
-            assert target.getPlayer() == null : target; // make sure target is free now
-        } else {
-            throw new ImpossibleMoveException(player, space, heading);
-        }
-    }
-    player.setSpace(space);
-}
-    class ImpossibleMoveException extends Exception {
-
-        private Player player;
-        private Space space;
-        private Heading heading;
-
-        public ImpossibleMoveException(Player player, Space space, Heading heading) {
-            super("Move impossible");
-            this.player = player;
-            this.space = space;
-            this.heading = heading;
-        }
-    }
-
- */
     // TODO Assignment V2
     public void fastForward(@NotNull Player player) {
         moveForward(player);
@@ -348,13 +313,41 @@ public class GameController {
             Heading heading = player.getHeading();
             Heading opposite = heading.next().next();
             Space target = board.getNeighbour(space, opposite);
-
             if (target != null) {
-                moveToSpace(player,target,heading);
+                    moveToBack(player, target,opposite);
+                if (player.getListCheckpoint().peek().equals(target)) {
+                    player.getListCheckpoint().pop();
+                    if (player.getListCheckpoint().isEmpty()) {
+                        endGame();
+                    }
+                }
             }
         }
-
     }
+    public boolean moveToBack(Player player, Space target, Heading opposite){
+        if(!target.getWalls().isEmpty() && target.getWalls().contains(opposite.next().next()) ){
+            return false;
+        } else if (!player.getSpace().getWalls().isEmpty() &&player.getSpace().getWalls().contains(opposite)) {
+            return false;
+        }
+        if (target.getPlayer() == null ) {
+            player.setSpace(target);
+            return true;
+        } else if (target.getPlayer() != null ){
+            Space other = board.getNeighbour(target, opposite);
+            boolean result = moveToBack(target.getPlayer(),other, opposite);
+            if(result!= false ){
+                player.setSpace(target);
+                return true;
+            }else {
+                return false;
+            }
+        } else{
+            return true;
+        }
+    }
+
+
     // TODO Assignment A3
     public void uTurn(@NotNull Player player){
         Heading heading = player.getHeading();

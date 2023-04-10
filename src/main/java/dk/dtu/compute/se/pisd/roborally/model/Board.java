@@ -113,12 +113,6 @@ public class Board extends Subject {
             notifyChange();
         }
     }
-    /*public void addWall(@NotNull Wall wall) {
-        if (wall.board == this && !walls.contains(wall)) {
-            walls.add(wall);
-            notifyChange();
-        }
-    }*/
 
     /**
      * Returns the player at position "i" in the array of players
