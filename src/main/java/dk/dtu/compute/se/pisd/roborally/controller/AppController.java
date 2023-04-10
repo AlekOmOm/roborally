@@ -52,7 +52,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import java.util.Random;
+
 
 import static dk.dtu.compute.se.pisd.roborally.fileaccess.LoadBoard.saveBoard;
 import static dk.dtu.compute.se.pisd.roborally.fileaccess.LoadBoard.saveCommandCard;
@@ -114,10 +114,33 @@ public class AppController implements Observer {
                 player.addCheckpoint(checkpoint2);
             }
 
-            // V4
-            Space space = board.getSpace(3,5);
-            space.addWall(Heading.WEST);
+            // V4 create walls
+            Space space1 = board.getSpace(2,3);
+            space1.addWall(Heading.WEST);
+            Space space2 = board.getSpace(2,3);
+            space2.addWall(Heading.NORTH);
+            Space space3 = board.getSpace(5,6);
+            space3.addWall(Heading.NORTH);
+            Space space4 = board.getSpace(5,4);
+            space4.addWall(Heading.NORTH);
+            Space space5 = board.getSpace(3,4);
+            space5.addWall(Heading.EAST);
+            Space space6 = board.getSpace(2,6);
+            space6.addWall(Heading.WEST);
+            Space space7 = board.getSpace(2,5);
+            space7.addWall(Heading.SOUTH);
+            Space space8 = board.getSpace(6,2);
+            space8.addWall(Heading.NORTH);
 
+            // V4 create fields on the board
+            Space sp1 = board.getSpace(1,0);
+            sp1.addFelte(Heading.SOUTH);
+            Space sp2 = board.getSpace(1,1);
+            sp2.addFelte(Heading.NORTH);
+            Space sp3 = board.getSpace(1,2);
+            sp3.addFelte(Heading.NORTH);
+            Space sp4 = board.getSpace(1,3);
+            sp4.addFelte(Heading.NORTH);
 
             // XXX: V2
             // board.setCurrentPlayer(board.getPlayer(0));

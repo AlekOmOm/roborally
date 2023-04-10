@@ -43,6 +43,7 @@ public class Space extends Subject {
 
     private Player player;
     private List<Heading> walls = new ArrayList<>();
+    private List<Heading> felter = new ArrayList<>();
     private List<FieldAction> actions = new ArrayList<>();
     boolean  checkpoint;
 
@@ -73,9 +74,11 @@ public class Space extends Subject {
         }
     }
 
-
     public List<Heading> getWalls() {
         return walls;
+    }
+    public List<Heading> getFelter(){
+        return felter;
     }
 
     public List<FieldAction> getActions() {
@@ -91,6 +94,11 @@ public class Space extends Subject {
     public void addWall(Heading heading) {
         if (!walls.contains(heading)) {
             this.walls.add(heading);
+        }
+    }
+    public void addFelte(Heading heading){
+        if(!felter.contains(heading)){
+            this.felter.add(heading);
         }
     }
     public boolean getCheckpoint(){
