@@ -91,4 +91,16 @@ class GameControllerTest {
             Assertions.assertEquals(current.getHeading(),before.prev()," ");
         }
     }
+
+    @Test
+    void uTurn(){
+        Board board = gameController.board;
+        Player current = board.getCurrentPlayer();
+        for(int i=0; i<=3; i++){
+            Heading before = current.getHeading();
+            gameController.uTurn(current);
+            Assertions.assertEquals(current.getHeading(), before.next().next(), " ");
+        }
+    }
+
 }
