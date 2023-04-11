@@ -36,7 +36,7 @@ class GameControllerTest {
     }
 
     /**
-     * Test for Assignment V1 (can be delete later once V1 was shown to the teacher)
+     * Test for Assignment V1 (can be deleted later once V1 was shown to the teacher)
      */
     @Test
     void testV1() {
@@ -89,6 +89,16 @@ class GameControllerTest {
             Heading before =current.getHeading();
             gameController.turnLeft(current);
             Assertions.assertEquals(current.getHeading(),before.prev()," ");
+        }
+    }
+    @Test
+    void turnRight() {
+        Board board = gameController.board;
+        Player current = board.getCurrentPlayer();
+        for (int i = 0; i <= 3; i++) {
+            Heading before = current.getHeading();
+            gameController.turnRight(current);
+            Assertions.assertEquals(current.getHeading(), before.next(), " ");
         }
     }
 
