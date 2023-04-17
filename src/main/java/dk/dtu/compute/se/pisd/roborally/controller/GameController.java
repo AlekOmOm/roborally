@@ -24,6 +24,8 @@ package dk.dtu.compute.se.pisd.roborally.controller;
 import dk.dtu.compute.se.pisd.roborally.model.*;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.List;
+
 /**
  * ...
  *
@@ -163,7 +165,19 @@ public class GameController {
                 if (nextPlayerNumber < board.getPlayersNumber()) {
                     board.setCurrentPlayer(board.getPlayer(nextPlayerNumber));
                 } else {
+                    step++;
                     // --> execute action on fields!
+                    for(Player player: board.getPlayer()){
+                     List<FieldAction> actions =player.getSpace().getActions();
+                     if(actions!=null){
+                         for(FieldAction action : actions){
+                            action.doAction(this,player.getSpace());
+                         }
+                         //if(player.getCheckpoints()==  board.getTotalCheckpoint()){
+                          //  board.setWon(true);
+                         }
+                     }
+                    }
                     // -> check checkpoint for alle players
                     step++;
                     if (step < Player.NO_REGISTERS) {

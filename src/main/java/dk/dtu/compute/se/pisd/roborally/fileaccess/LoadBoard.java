@@ -102,7 +102,6 @@ public class LoadBoard {
     public static void saveGame(Command command, Board board, String name) {
         GameTemplate template = new GameTemplate();
        // save CommandCardField
-
         CommandCardFieldTemplate commandCardFieldTemplate = new CommandCardFieldTemplate();
         template.setCommandTemplate(commandCardFieldTemplate);
 
@@ -177,65 +176,6 @@ public static void saveCommandCard(Command command){
 
 
 }
-    public static void saveBoard(Board board, String name) {
-        BoardTemplate template = new BoardTemplate();
-        template.width = board.width;
-        template.height = board.height;
-
-        for (int i=0; i<board.width; i++) {
-            for (int j=0; j<board.height; j++) {
-                Space space = board.getSpace(i,j);
-                if (!space.getWalls().isEmpty() || !space.getActions().isEmpty()|| space.getCheckpoint()!=0) {
-                    SpaceTemplate spaceTemplate = new SpaceTemplate();
-                    spaceTemplate.x = space.x;
-                    spaceTemplate.y = space.y;
-                    spaceTemplate.actions.addAll(space.getActions());
-                    spaceTemplate.walls.addAll(space.getWalls());
-                    template.spaces.add(spaceTemplate);
-                }
-            }
-        }
-
-        ClassLoader classLoader = LoadBoard.class.getClassLoader();
-        // TODO: this is not very defensive, and will result in a NullPointerException
-        //       when the folder "resources" does not exist! But, it does not need
-        //       the file "simpleCards.json" to exist!
-        String filename ="/Users/lynguyenhansen/Documents/Idea projekt/roborally 2/src/main/resources/boards/simpleCards.json";
-            //    classLoader.getResource(BOARDSFOLDER).getPath() + "/" + name + "." + JSON_EXT;
-
-        // In simple cases, we can create a Gson object with new:
-        //
-        //   Gson gson = new Gson();
-        //
-        // But, if you need to configure it, it is better to create it from
-        // a builder (here, we want to configure the JSON serialisation with
-        // a pretty printer):
-        GsonBuilder simpleBuilder = new GsonBuilder().
-                registerTypeAdapter(FieldAction.class, new Adapter<FieldAction>()).
-                setPrettyPrinting();
-        Gson gson = simpleBuilder.create();
-
-        FileWriter fileWriter = null;
-        JsonWriter writer = null;
-        try {
-            fileWriter = new FileWriter(filename);
-            writer = gson.newJsonWriter(fileWriter);
-            gson.toJson(template, template.getClass(), writer);
-            writer.close();
-        } catch (IOException e1) {
-            if (writer != null) {
-                try {
-                    writer.close();
-                    fileWriter = null;
-                } catch (IOException e2) {}
-            }
-            if (fileWriter != null) {
-                try {
-                    fileWriter.close();
-                } catch (IOException e2) {}
-            }
-        }
-    }
 
     public static Board createBoard(String name) {
         Board board = new Board(8,8);
@@ -243,10 +183,8 @@ public static void saveCommandCard(Command command){
         checkpoint1.setCheckpoint(1);
         //statusLabel = new Label("No.1");
 
-
         Space checkpoint2 = board.getSpace(2,3);
         checkpoint2.setCheckpoint(2);
-
 
         // V4 create walls on the board
         Space space1 = board.getSpace(2,3);

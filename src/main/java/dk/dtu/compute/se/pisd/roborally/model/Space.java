@@ -106,9 +106,6 @@ public class Space extends Subject {
 
     }
 
-    public void addCheckpoint(int checkpointNumber){
-
-    }
     public int getCheckpoint(){
         return checkpointNumber;
     }
