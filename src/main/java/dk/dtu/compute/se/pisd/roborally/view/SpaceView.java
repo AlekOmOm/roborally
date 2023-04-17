@@ -27,6 +27,7 @@ import dk.dtu.compute.se.pisd.roborally.controller.GameController;
 import dk.dtu.compute.se.pisd.roborally.model.*;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -45,7 +46,6 @@ import java.util.Random;
  * ...
  *
  * @author Ekkart Kindler, ekki@dtu.dk
- *
  */
 public class SpaceView extends StackPane implements ViewObserver {
 
@@ -53,10 +53,12 @@ public class SpaceView extends StackPane implements ViewObserver {
     final public static int SPACE_WIDTH = 55;  // 60; // 75;
 
     public final Space space;
+    private Label statusLabel;
 
 
     public SpaceView(@NotNull Space space) {
         this.space = space;
+        statusLabel = new Label("<no status>");
 
         // XXX the following styling should better be done with styles
         this.setPrefWidth(SPACE_WIDTH);
@@ -66,6 +68,8 @@ public class SpaceView extends StackPane implements ViewObserver {
         this.setPrefHeight(SPACE_HEIGHT);
         this.setMinHeight(SPACE_HEIGHT);
         this.setMaxHeight(SPACE_HEIGHT);
+
+        this.getChildren().add(statusLabel);
 
         if ((space.x + space.y) % 2 == 0) {
             this.setStyle("-fx-background-color: white;");
@@ -85,37 +89,43 @@ public class SpaceView extends StackPane implements ViewObserver {
         if (player != null) {
             Polygon arrow = new Polygon(0.0, 0.0,
                     10.0, 20.0,
-                    20.0, 0.0 );
+                    20.0, 0.0);
             try {
                 arrow.setFill(Color.valueOf(player.getColor()));
             } catch (Exception e) {
                 arrow.setFill(Color.MEDIUMPURPLE);
             }
 
-            arrow.setRotate((90*player.getHeading().ordinal())%360);
+            arrow.setRotate((90 * player.getHeading().ordinal()) % 360);
             this.getChildren().add(arrow);
         }
     }
+
     @Override
     public void updateView(Subject subject) {
         if (subject == this.space) {
             this.getChildren().clear();
-            updateFelter();
+            updateGears();
+            updateConveyorBelt();
             updateWall();
             updateCheckpoint();
             updatePlayer();
         }
     }
+
+    /**
+     * This method is used to determine how the walls are created in the space.
+     */
     public void updateWall() {
         List<Heading> wallsHeading = space.getWalls();
-        for(Heading wall :wallsHeading){
+        for (Heading wall : wallsHeading) {
             Pane pane = new Pane();
-            Line line = null ;
-          switch(wall){
-              case EAST -> line =new Line(SPACE_WIDTH-2, 2, SPACE_WIDTH-2,SPACE_HEIGHT-2);
-              case NORTH -> line =new Line (2,2,SPACE_WIDTH-2,2);
-              case WEST -> line =new Line(2,2,2,SPACE_HEIGHT-2);
-              case SOUTH  -> line =new Line(2,SPACE_HEIGHT-2,SPACE_WIDTH-2,SPACE_HEIGHT-2);
+            Line line = null;
+            switch (wall) {
+                case EAST -> line = new Line(SPACE_WIDTH - 2, 2, SPACE_WIDTH - 2, SPACE_HEIGHT - 2);
+                case NORTH -> line = new Line(2, 2, SPACE_WIDTH - 2, 2);
+                case WEST -> line = new Line(2, 2, 2, SPACE_HEIGHT - 2);
+                case SOUTH -> line = new Line(2, SPACE_HEIGHT - 2, SPACE_WIDTH - 2, SPACE_HEIGHT - 2);
             }
             line.setStroke(Color.RED);
             line.setStrokeWidth(5);
@@ -124,30 +134,28 @@ public class SpaceView extends StackPane implements ViewObserver {
         }
     }
 
-    public void updateFelter(){
-        List<Heading> felterHeading = space.getFelter();
-        for(Heading felte : felterHeading){
-            Polygon arrow = new Polygon(0.0, 0.0,
-                    25.0, 50.0,
-                    55.0, 0.0 );
-            try {
-                arrow.setFill(Color.LIGHTGRAY);
-            } catch (Exception e) {
-                arrow.setFill(Color.MEDIUMPURPLE);
-            }
-
-            arrow.setRotate((90*felte.ordinal())%360);
-            this.getChildren().add(arrow);
-        }
+    /**
+     * Methods are used to determine how the board elements are created in the space.
+     */
+    public void updateConveyorBelt() {
 
     }
-    public void updateCheckpoint(){
-        if(space.getCheckpoint()==true){
+
+    public void updateGears() {
+
+    }
+
+    /**
+     * This method is used to determine how the checkpoints are created in the space.
+     */
+    public void updateCheckpoint() {
+        if (space.getCheckpoint()!= 0) {
             this.setStyle("-fx-background-color: yellow;");
+
         }
     }
 
-    }
+}
 
 
 

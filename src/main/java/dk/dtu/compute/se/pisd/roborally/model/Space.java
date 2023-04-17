@@ -22,10 +22,11 @@
 package dk.dtu.compute.se.pisd.roborally.model;
 
 import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
+import dk.dtu.compute.se.pisd.roborally.controller.Checkpoint;
 import dk.dtu.compute.se.pisd.roborally.controller.FieldAction;
 
+import java.awt.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -45,7 +46,8 @@ public class Space extends Subject {
     private List<Heading> walls = new ArrayList<>();
     private List<Heading> felter = new ArrayList<>();
     private List<FieldAction> actions = new ArrayList<>();
-    boolean  checkpoint;
+    int checkpointNumber;
+
 
     public Space(Board board, int x, int y) {
         this.board = board;
@@ -96,16 +98,22 @@ public class Space extends Subject {
             this.walls.add(heading);
         }
     }
-    public void addFelte(Heading heading){
-        if(!felter.contains(heading)){
-            this.felter.add(heading);
-        }
+
+    public void addGear(){
+
     }
-    public boolean getCheckpoint(){
-        return checkpoint;
+    public void addConveyorBelt(){
+
     }
-    public void setCheckpoint(boolean checkpoint){
-         this.checkpoint = checkpoint;
+
+    public void addCheckpoint(int checkpointNumber){
+
+    }
+    public int getCheckpoint(){
+        return checkpointNumber;
+    }
+    public void setCheckpoint(int checkpointNumber){
+        this.checkpointNumber= checkpointNumber;
     }
 
 }

@@ -1,0 +1,82 @@
+{
+  "commandTemplate": {
+    "commands": []
+  },
+  "boardTemplate": {
+    "width": 8,
+    "height": 8,
+    "spaces": [
+      {
+        "walls": [
+          "WEST",
+          "NORTH"
+        ],
+        "actions": [],
+        "felter": [],
+        "CheckPoint": 2,
+        "x": 2,
+        "y": 3
+      },
+      {
+        "walls": [
+          "SOUTH"
+        ],
+        "actions": [],
+        "felter": [],
+        "CheckPoint": 0,
+        "x": 2,
+        "y": 5
+      },
+      {
+        "walls": [
+          "WEST"
+        ],
+        "actions": [],
+        "felter": [],
+        "CheckPoint": 0,
+        "x": 2,
+        "y": 6
+      },
+      {
+        "walls": [
+          "EAST"
+        ],
+        "actions": [],
+        "felter": [],
+        "CheckPoint": 0,
+        "x": 3,
+        "y": 4
+      },
+      {
+        "walls": [
+          "NORTH"
+        ],
+        "actions": [],
+        "felter": [],
+        "CheckPoint": 0,
+        "x": 5,
+        "y": 4
+      },
+      {
+        "walls": [
+          "NORTH"
+        ],
+        "actions": [],
+        "felter": [],
+        "CheckPoint": 1,
+        "x": 5,
+        "y": 6
+      },
+      {
+        "walls": [
+          "NORTH"
+        ],
+        "actions": [],
+        "felter": [],
+        "CheckPoint": 0,
+        "x": 6,
+        "y": 2
+      }
+    ]
+  }
+}

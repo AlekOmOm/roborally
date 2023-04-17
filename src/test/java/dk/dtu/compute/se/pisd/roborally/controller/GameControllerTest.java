@@ -35,19 +35,6 @@ class GameControllerTest {
         gameController = null;
     }
 
-    /**
-     * Test for Assignment V1 (can be delete later once V1 was shown to the teacher)
-     */
-    @Test
-    void testV1() {
-        Board board = gameController.board;
-
-        Player player = board.getCurrentPlayer();
-        gameController.moveCurrentPlayerToSpace(board.getSpace(0, 4));
-
-        Assertions.assertEquals(player, board.getSpace(0, 4).getPlayer(), "Player " + player.getName() + " should beSpace (0,4)!");
-    }
-
     /*
         The following tests should be used later for assignment V2 */
 
@@ -78,6 +65,15 @@ class GameControllerTest {
     @Test
     // test player
     void moveForward1(){
+        Board board = gameController.board;
+        Player player1 = board.getPlayer(0);
+        Player player2 = board.getPlayer(1);
+        board.getSpace(0, 0).setPlayer(player1);
+        board.getSpace(0, 1).setPlayer(player2);
+        gameController.moveForward(player1);
+        Assertions.assertEquals(player1, board.getSpace(0, 1).getPlayer(), "Player " + player1.getName() + " should beSpace (0,1)!");
+        Assertions.assertEquals(player2, board.getSpace(0, 2).getPlayer(), "Player " + player2.getName() + " should beSpace (0,2)!");
+
 
     }
 

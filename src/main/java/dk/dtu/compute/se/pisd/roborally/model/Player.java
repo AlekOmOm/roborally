@@ -49,7 +49,8 @@ public class Player extends Subject {
 
     private CommandCardField[] program;
     private CommandCardField[] cards;
-    private Stack<Space> listCheckpoint = new Stack<Space>();
+    int checkpoint = 0;
+
 
     public Player(@NotNull Board board, String color, @NotNull String name) {
         this.board = board;
@@ -149,13 +150,12 @@ public class Player extends Subject {
         return cards[i];
     }
 
-    public Stack<Space> getListCheckpoint() {
-        return listCheckpoint;
+    public int getCheckpoints(){
+   return checkpoint;
     }
-    public void setListCheckpoint(Stack<Space> spaceStack){
-    this.listCheckpoint= spaceStack;
+    public void setCheckpoints(int checkpoint){
+        this.checkpoint=checkpoint;
+
     }
-    public void addCheckpoint(Space checkpoint){
-        listCheckpoint.push(checkpoint);
-    }
+
 }

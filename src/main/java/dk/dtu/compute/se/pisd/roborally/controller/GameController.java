@@ -163,7 +163,7 @@ public class GameController {
                 if (nextPlayerNumber < board.getPlayersNumber()) {
                     board.setCurrentPlayer(board.getPlayer(nextPlayerNumber));
                 } else {
-                   // --> execute action on fields!
+                    // --> execute action on fields!
                     // -> check checkpoint for alle players
                     step++;
                     if (step < Player.NO_REGISTERS) {
@@ -226,6 +226,9 @@ public class GameController {
                 case FAST_FORWARD:
                     this.fastForward(player);
                     break;
+                case FASTER_FORWARD:
+                    this.fasterForward(player);
+                    break;
                 case STEP_BACK:
                     this.stepBack(player);
                     break;
@@ -238,56 +241,64 @@ public class GameController {
         }
     }
 
+    /**
+     * This method is used to make the current player's movement
+     * @param player the current player.
+     */
     // TODO Assignment V2
-
     public void moveForward(@NotNull Player player) {
         if (player.board == board) {
             Space space = player.getSpace();
             Heading heading = player.getHeading();
             Space target = board.getNeighbour(space, heading);
-            if (target!=null) {
+            if (target != null) {
                 moveToSpace(player, target, heading);
-                if (player.getListCheckpoint().peek().equals(target)) {
-                    player.getListCheckpoint().pop();
-                    if (player.getListCheckpoint().isEmpty()) {
-                        endGame();
-                    }
-                }
+
             }
         }
     }
-    // todo
-    public void endGame(){
 
+    /**
+     * This method is used to end the game when there is a winner.
+     */
+    // todo V4b
+    public void endGame() {
+        board.setPhase(Phase.ENDGAME);
 
     }
-/**
- * This method is used to check the new space before the current player moves.
- */
+
+    /**
+     * This method is used to check the new space is available for the current player moves.
+     * to check the walls -so the player can't wall through the walls
+     * to check if there is any player in the new space, if yes, move to make space available for current player.
+     */
     private boolean moveToSpace(Player player, Space target, Heading heading) {
-        if(!target.getWalls().isEmpty() && target.getWalls().contains(heading.next().next())){
-         return false;
-        }else if (!player.getSpace().getWalls().isEmpty() && player.getSpace().getWalls().contains(heading)) {
+        if (!target.getWalls().isEmpty() && target.getWalls().contains(heading.next().next())) {
+            return false;
+        } else if (!player.getSpace().getWalls().isEmpty() && player.getSpace().getWalls().contains(heading)) {
             return false;
         }
-        if (target.getPlayer() == null ) {
+        if (target.getPlayer() == null) {
             player.setSpace(target);
             return true;
-        } else if (target.getPlayer() != null ){
+        } else if (target.getPlayer() != null) {
             Space other = board.getNeighbour(target, heading);
-           boolean result = moveToSpace(target.getPlayer(), other, heading);
-            if(result!= false ){
-                    player.setSpace(target);
+            boolean result = moveToSpace(target.getPlayer(), other, heading);
+            if (result != false) {
+                player.setSpace(target);
                 return true;
-            }else {
+            } else {
                 return false;
             }
-        } else{
-        return true;
+        } else {
+            return true;
         }
     }
 
-
+    /**
+     * This method is used to make the player move twice as fast as normal.
+     * @param player the current player
+     */
     // TODO Assignment V2
     public void fastForward(@NotNull Player player) {
         moveForward(player);
@@ -295,65 +306,59 @@ public class GameController {
 
     }
 
+    /**
+     * This method is used to change the player's direction 90 degrees to the right side.
+     * @param player the current player
+     */
     // TODO Assignment V2
     public void turnRight(@NotNull Player player) {
         Heading heading = player.getHeading();
         player.setHeading(heading.next());
     }
 
+    /**
+     * This method is used to change the player's direction 90 degrees to the left side.
+     * @param player the current player
+     */
     // TODO Assignment V2
     public void turnLeft(@NotNull Player player) {
         Heading heading = player.getHeading();
         player.setHeading(heading.prev());
     }
-    // TODO Assignment A3
-    public void stepBack(@NotNull Player player) {
-        if (player.board == board) {
-            Space space = player.getSpace();
-            Heading heading = player.getHeading();
-            Heading opposite = heading.next().next();
-            Space target = board.getNeighbour(space, opposite);
-            if (target != null) {
-                    moveToBack(player, target,opposite);
-                if (player.getListCheckpoint().peek().equals(target)) {
-                    player.getListCheckpoint().pop();
-                    if (player.getListCheckpoint().isEmpty()) {
-                        endGame();
-                    }
-                }
-            }
-        }
-    }
-    public boolean moveToBack(Player player, Space target, Heading opposite){
-        if(!target.getWalls().isEmpty() && target.getWalls().contains(opposite.next().next()) ){
-            return false;
-        } else if (!player.getSpace().getWalls().isEmpty() &&player.getSpace().getWalls().contains(opposite)) {
-            return false;
-        }
-        if (target.getPlayer() == null ) {
-            player.setSpace(target);
-            return true;
-        } else if (target.getPlayer() != null ){
-            Space other = board.getNeighbour(target, opposite);
-            boolean result = moveToBack(target.getPlayer(),other, opposite);
-            if(result!= false ){
-                player.setSpace(target);
-                return true;
-            }else {
-                return false;
-            }
-        } else{
-            return true;
-        }
-    }
 
 
+    /**
+     * This method is used to change the player's direction 180 degrees
+     * @param player the current player
+     */
+
     // TODO Assignment A3
-    public void uTurn(@NotNull Player player){
+    public void uTurn(@NotNull Player player) {
         Heading heading = player.getHeading();
         player.setHeading(heading.next().next());
     }
+    /**
+     * This method is used to make the current player steps back
+     * @param player the current player
+     */
+    // TODO Assignment A3
+    public void stepBack(@NotNull Player player) {
+           uTurn(player);
+           moveForward(player);
+           uTurn(player);
+    }
+    public void fasterForward(@NotNull Player player){
+        moveForward(player);
+        moveForward(player);
+        moveForward(player);
+    }
 
+    /**
+     * This method is used to change the programming card on the card field.
+     * @param source the current card
+     * @param target the new card
+     * @return true or false for the method execution result.
+     */
     public boolean moveCards(@NotNull CommandCardField source, @NotNull CommandCardField target) {
         CommandCard sourceCard = source.getCard();
         CommandCard targetCard = target.getCard();
