@@ -26,8 +26,10 @@ import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
 
 import dk.dtu.compute.se.pisd.roborally.RoboRally;
 
+import dk.dtu.compute.se.pisd.roborally.dal.Repository;
 import dk.dtu.compute.se.pisd.roborally.dal.RepositoryAccess;
 import dk.dtu.compute.se.pisd.roborally.fileaccess.LoadBoard;
+import dk.dtu.compute.se.pisd.roborally.fileactions.model.FileLoader;
 import dk.dtu.compute.se.pisd.roborally.model.*;
 
 import dk.dtu.compute.se.pisd.roborally.view.RoboRallyMenuBar;
@@ -223,5 +225,12 @@ public class AppController implements Observer {
         // XXX do nothing for now
     }
 
+    private String selectBoardLayout() {
 
+        FileLoader fl = new FileLoader();
+        String filename = fl.open();
+
+        return filename;
+
+    }
 }

@@ -42,6 +42,7 @@ public class Space extends Subject {
     public final int y;
 
     private Player player;
+    private int startPlayerNo;
     private List<Heading> walls = new ArrayList<>();
     private List<Heading> felter = new ArrayList<>();
     private List<FieldAction> actions = new ArrayList<>();
@@ -79,6 +80,22 @@ public class Space extends Subject {
     }
     public List<Heading> getFelter(){
         return felter;
+    }
+    public void setStartPlayerNo(int startPlayerNo) {
+        this.startPlayerNo = startPlayerNo;
+        notifyChange();
+    }
+    public void addAction(FieldAction action) {
+        this.actions.add(action);
+
+        if (action instanceof Checkpoint) {
+            this.board.setCheckpoint((Checkpoint) action);
+        }
+
+        notifyChange();
+    }
+    public int getStartPlayerNo() {
+        return startPlayerNo;
     }
 
     public List<FieldAction> getActions() {
