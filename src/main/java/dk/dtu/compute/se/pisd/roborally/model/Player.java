@@ -40,10 +40,11 @@ public class Player extends Subject {
     final public static int NO_CARDS = 8;
 
     final public Board board;
-
+    private int lastCheckpoint;
     private String name;
     private String color;
-
+    public int no;
+    private int dbNo;
     private Space space;
     private Heading heading = SOUTH;
 
@@ -157,5 +158,22 @@ public class Player extends Subject {
     }
     public void addCheckpoint(Space checkpoint){
         listCheckpoint.push(checkpoint);
+    }
+    public int getDbNo() {
+        return dbNo;
+    }
+
+    public void setLastCheckpoint(int lastCheckpoint) {
+        // we only update this if the new checkpoint number is higher than the one the player already has
+        if (lastCheckpoint == (this.lastCheckpoint + 1)) {
+            this.lastCheckpoint = lastCheckpoint;
+            notifyChange();
+        }
+    }
+    public void setDbNo(int dbNo) {
+        this.dbNo = dbNo;
+    }
+    public int getLastCheckpoint() {
+        return lastCheckpoint;
     }
 }

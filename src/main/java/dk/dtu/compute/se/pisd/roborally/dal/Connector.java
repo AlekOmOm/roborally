@@ -29,6 +29,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import static dk.dtu.compute.se.pisd.roborally.dal.UserNamesAndPasswords.DB_PWD;
+import static dk.dtu.compute.se.pisd.roborally.dal.UserNamesAndPasswords.DB_USER;
+
 /**
  * ...
  *
@@ -40,8 +43,8 @@ class Connector {
     private static final String HOST     = "localhost";
     private static final int    PORT     = 3306;
     private static final String DATABASE = "pisu";
-    private static final String USERNAME = "root";
-    private static final String PASSWORD = "ly661546";
+    private static final String USERNAME = DB_USER;
+    private static final String PASSWORD = DB_PWD;
 
     private static final String DELIMITER = ";;";
 

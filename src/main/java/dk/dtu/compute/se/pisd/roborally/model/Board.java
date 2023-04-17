@@ -22,6 +22,7 @@
 package dk.dtu.compute.se.pisd.roborally.model;
 
 import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
+import javafx.scene.control.TextInputDialog;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -47,11 +48,14 @@ public class Board extends Subject {
     private Integer gameId;
 
     private final Space[][] spaces;
+    private Antenna antenna;
+    private List<Checkpoint> checkpoints = new ArrayList<Checkpoint>();
 
     private final List<Player> players = new ArrayList<>();
 
     private Player current;
-
+    private String name;
+    private int gameID;
     private Phase phase = INITIALISATION;
 
     private int step = 0;
@@ -97,6 +101,10 @@ public class Board extends Subject {
         } else {
             return null;
         }
+    }
+
+    public Space[][] getSpaces() {
+        return spaces;
     }
 
     /**
@@ -147,7 +155,9 @@ public class Board extends Subject {
             notifyChange();
         }
     }
-
+    public int getGameID() {
+        return gameID;
+    }
     public Phase getPhase() {
         return phase;
     }
@@ -170,6 +180,28 @@ public class Board extends Subject {
         }
     }
 
+    public List<Checkpoint> getCheckpoints() {
+        return this.checkpoints;
+    }
+
+    public void setCheckpoint(Checkpoint checkpoint) {
+        this.checkpoints.add(checkpoint);
+    }
+
+
+    public Antenna getAntenna() {
+        return this.antenna;
+    }
+
+    public void setAntenna(Antenna antenna) {
+        this.antenna = antenna;
+        for (Space[] spaces : this.spaces) {
+            for (Space space : spaces) {
+                // Very hack, we just need to trigger an update on all spaces.
+                space.playerChanged();
+            }
+        }
+    }
     public boolean isStepMode() {
         return stepMode;
     }
@@ -192,6 +224,39 @@ public class Board extends Subject {
         } else {
             return -1;
         }
+    }
+    public void setName(@NotNull String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+
+        if (this.name != null) {
+
+            return name;
+
+        } else {
+            TextInputDialog dialog = new TextInputDialog();
+            dialog.setTitle("Navn");
+            dialog.setContentText("Indtast dit navn for spillet");
+            dialog.showAndWait();
+
+            if (dialog.getResult() != null) {
+                this.name = dialog.getResult();
+                return this.name;
+            }
+        }
+        return null;
+    }
+    public Player getPlayerByDB(int i) {
+        if (i >= 0 && i < players.size()) {
+            for (Player player: players) {
+                if (player.getDbNo() == i)
+                    return player;
+            }
+        }
+
+        return null;
     }
 
     /**
