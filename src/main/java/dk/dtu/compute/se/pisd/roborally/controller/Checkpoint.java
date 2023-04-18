@@ -13,13 +13,12 @@ public class Checkpoint extends FieldAction {
 
 
     /**
-     *
+     * This method checks if there is a player located on the space.
+     * If yes then checks if the players total checkpoints is less than the checkpoint number which the player has landed on
+     * If yes then the player is granted a checkpoint number.
      * @param gameController
      * @param space
      * @return
-     *This method checks if there is a player located on the space.
-     *If yes then checks if the players total checkpoints is less than the checkpoint number which the player has landed on
-     *If yes then the player is granted a checkpoint number.
      */
     @Override
     public boolean doAction(@NotNull GameController gameController, @NotNull Space space) {

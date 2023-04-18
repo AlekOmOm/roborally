@@ -9,7 +9,6 @@ import org.jetbrains.annotations.NotNull;
 
 public class Gear extends FieldAction {
         public final static int LEFT_TURN = 1;
-        public final static int RIGHT_TURN = -1;
 
         private int directionOfTurn;
     
@@ -35,7 +34,4 @@ public class Gear extends FieldAction {
         return true;
     }
 
-    public int getDirectionOfTurn() {
-        return directionOfTurn;
-    }
 }

@@ -29,7 +29,6 @@ import dk.dtu.compute.se.pisd.roborally.RoboRally;
 import dk.dtu.compute.se.pisd.roborally.dal.Repository;
 import dk.dtu.compute.se.pisd.roborally.dal.RepositoryAccess;
 import dk.dtu.compute.se.pisd.roborally.fileaccess.LoadBoard;
-import dk.dtu.compute.se.pisd.roborally.fileactions.model.FileLoader;
 import dk.dtu.compute.se.pisd.roborally.model.*;
 
 import dk.dtu.compute.se.pisd.roborally.view.RoboRallyMenuBar;
@@ -52,7 +51,6 @@ import java.util.Optional;
 
 
 import static dk.dtu.compute.se.pisd.roborally.fileaccess.LoadBoard.saveGame;
-import static dk.dtu.compute.se.pisd.roborally.fileaccess.LoadBoard.saveCommandCard;
 import static dk.dtu.compute.se.pisd.roborally.view.SpaceView.SPACE_HEIGHT;
 import static dk.dtu.compute.se.pisd.roborally.view.SpaceView.SPACE_WIDTH;
 
@@ -97,7 +95,7 @@ public class AppController implements Observer {
 
             // XXX the board should eventually be created programmatically or loaded from a file
             //     here we just create an empty board with the required number of players.
-            board = LoadBoard.createBoard(null );
+            board = LoadBoard.createBoard(null);
             gameController = new GameController(board);
             int no = result.get();
 
@@ -107,7 +105,6 @@ public class AppController implements Observer {
                 player.setSpace(board.getSpace(i % board.width, i));
 
             }
-
 
             // XXX: V2
             // board.setCurrentPlayer(board.getPlayer(0));
@@ -122,20 +119,19 @@ public class AppController implements Observer {
     public void saveGame() {
         // XXX needs to be implemented eventually
         LoadBoard loadboard = new LoadBoard();
-        //LoadBoard.saveCommandCard();
-
-            loadboard.saveGame(command,board, "game");
+        loadboard.saveGame(command, board, "game");
     }
 
     public void loadGame() {
         // XXX needs to be implememted eventually
         // for now, we just create a new game
+        LoadBoard loadboard = new LoadBoard();
+        loadboard.loadBoard("game");
         if (gameController == null) {
             Board board = RepositoryAccess.getRepository().loadGameFromDB(81);
             gameController = new GameController(board);
             roboRally.createBoardView(gameController);
         }
-
 
     }
 
@@ -188,14 +184,5 @@ public class AppController implements Observer {
     @Override
     public void update(Subject subject) {
         // XXX do nothing for now
-    }
-
-    private String selectBoardLayout() {
-
-        FileLoader fl = new FileLoader();
-        String filename = fl.open();
-
-        return filename;
-
     }
 }

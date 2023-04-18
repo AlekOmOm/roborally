@@ -21,7 +21,9 @@
  */
 package dk.dtu.compute.se.pisd.roborally.controller;
 
+import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
 import dk.dtu.compute.se.pisd.roborally.model.*;
+import dk.dtu.compute.se.pisd.roborally.view.PlayersView;
 import javafx.scene.control.Alert;
 import org.jetbrains.annotations.NotNull;
 
@@ -167,19 +169,10 @@ public class GameController {
                     board.setCurrentPlayer(board.getPlayer(nextPlayerNumber));
                 } else {
                     step++;
+                    actionFileds(step);
                     // --> execute action on fields!
-                    for (int i = 0; i < board.getPlayersNumber(); i++) {
-                        List<FieldAction> actions = board.getPlayer(i).getSpace().getActions();
-                        if (actions != null) {
-                            for (FieldAction action : actions) {
-                                action.doAction(this, board.getPlayer(i).getSpace());
-                            }
-                            //if(player.getCheckpoints()==  board.getTotalCheckpoint()){
-                            //  board.setWon(true);
-                        }
-                    }
                     // -> check checkpoint for alle players
-                    step++;
+
                     if (step < Player.NO_REGISTERS) {
                         makeProgramFieldsVisible(step);
                         board.setStep(step);
@@ -197,6 +190,23 @@ public class GameController {
             assert false;
         }
     }
+    public void actionFileds(int step){
+        if(step>=Player.NO_REGISTERS){
+            for(int i=0; i< board.getPlayersNumber();i++){
+                if(board.getPlayer(i).getSpace().getConveyorBelt()!= null){
+                    moveByConveyor(board.getPlayer(i));
+                }
+                if(board.getPlayer(i).getSpace().getGear()!=null){
+
+                    board.getPlayer(i).getSpace().getGear().doAction(this,board.getPlayer(i).getSpace());
+                }
+                if(board.getPlayer(i).getSpace().getCheckpoint()== board.getTheNumberOfCheckpoint()){
+
+                    endGame();
+                }
+            }
+        }
+    }
 
     public void executeCommandOptionAndContinue(@NotNull Command option) {
         Player currentPlayer = board.getCurrentPlayer();
@@ -208,6 +218,7 @@ public class GameController {
                 board.setCurrentPlayer(board.getPlayer(nextPlayerNumber));
             } else {
                 int step = board.getStep() + 1;
+
                 if (step < Player.NO_REGISTERS) {
                     makeProgramFieldsVisible(step);
                     board.setStep(step);
@@ -218,6 +229,12 @@ public class GameController {
             }
         }
         continuePrograms();
+    }
+    public void moveByConveyor(Player player){
+        board.getNeighbour(player.getSpace(),player.getSpace().getConveyorBelt().getHeading()).setPlayer(player);
+        /*if(player.getSpace().getConveyorBelt()!=null){
+            moveByConveyor(player);}*/
+
     }
 
     // XXX: V2
@@ -279,7 +296,9 @@ public class GameController {
     // todo V4b
     public void endGame() {
         board.setPhase(Phase.ENDGAME);
-
+        PlayersView playersView = new PlayersView(this);
+        playersView.updateView(board);
+        System.out.println("The winner is:" +board.getCurrentPlayer());
     }
 
     /**
@@ -344,10 +363,8 @@ public class GameController {
         player.setHeading(heading.prev());
     }
 
-
     /**
      * This method is used to change the player's direction 180 degrees
-     *
      * @param player the current player
      */
 
@@ -392,12 +409,6 @@ public class GameController {
         } else {
             return false;
         }
-    }
-
-    public void initiateWin(Player player) {
-        Alert winMsg = new Alert(Alert.AlertType.INFORMATION, "Spiller \"" + player.getName() + "\" har vundet spillet.");
-        this.won = true;
-        winMsg.showAndWait();
     }
 
     /**

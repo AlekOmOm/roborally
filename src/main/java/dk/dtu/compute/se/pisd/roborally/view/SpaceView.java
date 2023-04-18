@@ -23,6 +23,7 @@ package dk.dtu.compute.se.pisd.roborally.view;
 
 import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
 import dk.dtu.compute.se.pisd.roborally.controller.AppController;
+import dk.dtu.compute.se.pisd.roborally.controller.ConveyorBelt;
 import dk.dtu.compute.se.pisd.roborally.controller.GameController;
 import dk.dtu.compute.se.pisd.roborally.model.*;
 import javafx.scene.canvas.Canvas;
@@ -35,6 +36,7 @@ import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.StrokeLineCap;
+import javafx.scene.text.Text;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
@@ -138,21 +140,33 @@ public class SpaceView extends StackPane implements ViewObserver {
      * Methods are used to determine how the board elements are created in the space.
      */
     public void updateConveyorBelt() {
-
+        ConveyorBelt conveyorBelt = space.getConveyorBelt();
+        if (conveyorBelt !=null) {
+            Polygon arrow = new Polygon(0.0, 0.0,
+                    SPACE_WIDTH/ 2-3, SPACE_HEIGHT -5,
+                    SPACE_HEIGHT -5, 0.0);
+            try {
+                arrow.setFill(Color.LIGHTGRAY);
+            } catch (Exception e) {
+                arrow.setFill(Color.MEDIUMPURPLE);
+            }
+            arrow.setRotate((90 * conveyorBelt.getHeading().ordinal()) % 360);
+            this.getChildren().add(arrow);
+        }
     }
 
     public void updateGears() {
 
     }
-
     /**
      * This method is used to determine how the checkpoints are created in the space.
      */
     public void updateCheckpoint() {
         if (space.getCheckpoint()!= 0) {
             this.setStyle("-fx-background-color: yellow;");
-
-            statusLabel = new Label(String.valueOf(space.getCheckpoint()));
+            Text t =new Text();
+            t.setText(String.valueOf("Check\npoint."+space.getCheckpoint()));
+           this.getChildren().add(t);
         }
     }
 

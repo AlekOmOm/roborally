@@ -67,10 +67,10 @@ public class LoadBoard {
         Gson gson = simpleBuilder.create();
 
         Board result;
-        // FileReader fileReader = null;
+         FileReader fileReader = null;
         JsonReader reader = null;
         try {
-            // fileReader = new FileReader(filename);
+             fileReader = new FileReader("/Users/lynguyenhansen/Documents/Idea projekt/roborally 2/src/main/resources/boards/simpleCards.json");
             reader = gson.newJsonReader(new InputStreamReader(inputStream));
             BoardTemplate template = gson.fromJson(reader, BoardTemplate.class);
 
@@ -105,8 +105,6 @@ public class LoadBoard {
         CommandCardFieldTemplate commandCardFieldTemplate = new CommandCardFieldTemplate();
         template.setCommandTemplate(commandCardFieldTemplate);
 
-
-
         // save board
         BoardTemplate boardTemplate = new BoardTemplate();
         template.setBoardTemplate(boardTemplate);
@@ -121,9 +119,8 @@ public class LoadBoard {
                     spaceTemplate.y = space.y;
                     spaceTemplate.actions.addAll(space.getActions());
                     spaceTemplate.walls.addAll(space.getWalls());
-                    spaceTemplate.felter.addAll(space.getFelter());
-
-                    spaceTemplate.CheckPoint=space.getCheckpoint();
+                    spaceTemplate.conveyorBelt=space.getConveyorBelt();
+                    spaceTemplate.gear = space.getGear();
                     boardTemplate.spaces.add(spaceTemplate);
                 }
             }
@@ -169,20 +166,19 @@ public class LoadBoard {
         }
     }
 
-
+    /*
 public static void saveCommandCard(Command command){
     CommandCardFieldTemplate template = new CommandCardFieldTemplate();
 
-
-
-}
+}*/
 
     public static Board createBoard(String name) {
         Board board = new Board(8,8);
+
+        // V4 create checkpoints on the board
+        int TheNumberOfCheckpoint=2;
         Space checkpoint1 = board.getSpace(5,6);
         checkpoint1.setCheckpoint(1);
-        //statusLabel = new Label("No.1");
-
         Space checkpoint2 = board.getSpace(2,3);
         checkpoint2.setCheckpoint(2);
 
@@ -206,13 +202,13 @@ public static void saveCommandCard(Command command){
 
         // V4 create ConveyorBelts on the board
         Space sp1 = board.getSpace(1,0);
-        sp1.addConveyorBelt();
+        sp1.addConveyorBelt(Heading.SOUTH);
         Space sp2 = board.getSpace(1,1);
-        sp2.addConveyorBelt();
+        sp2.addConveyorBelt(Heading.SOUTH);
         Space sp3 = board.getSpace(1,2);
-        sp3.addConveyorBelt();
+        sp3.addConveyorBelt(Heading.SOUTH);
         Space sp4 = board.getSpace(1,3);
-        sp4.addConveyorBelt();
+        sp4.addConveyorBelt(Heading.SOUTH);
 
         // V4 create Gears on the board
         Space space =board.getSpace(5,7);

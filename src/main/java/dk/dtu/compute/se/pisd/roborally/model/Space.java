@@ -23,9 +23,10 @@ package dk.dtu.compute.se.pisd.roborally.model;
 
 import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
 import dk.dtu.compute.se.pisd.roborally.controller.Checkpoint;
+import dk.dtu.compute.se.pisd.roborally.controller.ConveyorBelt;
 import dk.dtu.compute.se.pisd.roborally.controller.FieldAction;
+import dk.dtu.compute.se.pisd.roborally.controller.Gear;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,16 +46,19 @@ public class Space extends Subject {
     private Player player;
     private int startPlayerNo;
     private List<Heading> walls = new ArrayList<>();
-    private List<Heading> felter = new ArrayList<>();
+
     private List<FieldAction> actions = new ArrayList<>();
     int checkpointNumber;
-
+    private ConveyorBelt conveyorBelt;
+    private Gear gear;
 
     public Space(Board board, int x, int y) {
         this.board = board;
         this.x = x;
         this.y = y;
         player = null;
+        conveyorBelt=null;
+        gear=null;
     }
 
     public Player getPlayer() {
@@ -80,24 +84,11 @@ public class Space extends Subject {
     public List<Heading> getWalls() {
         return walls;
     }
-    public List<Heading> getFelter(){
-        return felter;
+    public ConveyorBelt  getConveyorBelt(){
+        return conveyorBelt;
     }
-    public void setStartPlayerNo(int startPlayerNo) {
-        this.startPlayerNo = startPlayerNo;
-        notifyChange();
-    }
-    public void addAction(FieldAction action) {
-        this.actions.add(action);
-
-       // if (action instanceof Checkpoint) {
-            //this.board.setCheckpoint((Checkpoint) action);
-       // }
-
-        notifyChange();
-    }
-    public int getStartPlayerNo() {
-        return startPlayerNo;
+    public Gear getGear(){
+        return gear;
     }
 
     public List<FieldAction> getActions() {
@@ -119,7 +110,7 @@ public class Space extends Subject {
     public void addGear(){
 
     }
-    public void addConveyorBelt(){
+    public void addConveyorBelt(Heading heading){
 
     }
 
@@ -129,5 +120,6 @@ public class Space extends Subject {
     public void setCheckpoint(int checkpointNumber){
         this.checkpointNumber= checkpointNumber;
     }
+
 
 }

@@ -22,6 +22,8 @@
 package dk.dtu.compute.se.pisd.roborally.model;
 
 import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
+import dk.dtu.compute.se.pisd.roborally.controller.Antenna;
+import dk.dtu.compute.se.pisd.roborally.controller.Checkpoint;
 import javafx.scene.control.TextInputDialog;
 import org.jetbrains.annotations.NotNull;
 
@@ -49,18 +51,18 @@ public class Board extends Subject {
 
     private final Space[][] spaces;
     private Antenna antenna;
-    private List<Checkpoint> checkpoints = new ArrayList<Checkpoint>();
 
     private final List<Player> players = new ArrayList<>();
 
     private Player current;
     private String name;
-    private int gameID;
+
     private Phase phase = INITIALISATION;
 
     private int step = 0;
 
     private boolean stepMode;
+    int TheNumberOfCheckpoint=2;
 
     public Board(int width, int height, @NotNull String boardName) {
         this.boardName = boardName;
@@ -68,7 +70,7 @@ public class Board extends Subject {
         this.height = height;
         spaces = new Space[width][height];
         for (int x = 0; x < width; x++) {
-            for(int y = 0; y < height; y++) {
+            for (int y = 0; y < height; y++) {
                 Space space = new Space(this, x, y);
                 spaces[x][y] = space;
             }
@@ -102,13 +104,13 @@ public class Board extends Subject {
             return null;
         }
     }
+   /* public int getTotalCheckpoint(){
 
-    public Space[][] getSpaces() {
-        return spaces;
-    }
+    }*/
 
     /**
      * Returns the number of players in the array of players.
+     *
      * @return number of players
      */
     public int getPlayersNumber() {
@@ -124,6 +126,7 @@ public class Board extends Subject {
 
     /**
      * Returns the player at position "i" in the array of players
+     *
      * @param i is the sequence number of players in the array
      * @return player at position "i"
      */
@@ -138,6 +141,7 @@ public class Board extends Subject {
     /**
      * Returns the current player of the game. This is the player who's
      * programming card will be executed next.
+     *
      * @return the current player of the game
      */
     public Player getCurrentPlayer() {
@@ -147,6 +151,7 @@ public class Board extends Subject {
     /**
      * This method is used to modify the current player.
      * Takes a parameter "player" and assigns it to the current player.
+     *
      * @param player the player whose turn to play
      */
     public void setCurrentPlayer(Player player) {
@@ -155,9 +160,7 @@ public class Board extends Subject {
             notifyChange();
         }
     }
-    public int getGameID() {
-        return gameID;
-    }
+
     public Phase getPhase() {
         return phase;
     }
@@ -180,28 +183,7 @@ public class Board extends Subject {
         }
     }
 
-    public List<Checkpoint> getCheckpoints() {
-        return this.checkpoints;
-    }
 
-    public void setCheckpoint(Checkpoint checkpoint) {
-        this.checkpoints.add(checkpoint);
-    }
-
-
-    public Antenna getAntenna() {
-        return this.antenna;
-    }
-
-    public void setAntenna(Antenna antenna) {
-        this.antenna = antenna;
-        for (Space[] spaces : this.spaces) {
-            for (Space space : spaces) {
-                // Very hack, we just need to trigger an update on all spaces.
-                space.playerChanged();
-            }
-        }
-    }
     public boolean isStepMode() {
         return stepMode;
     }
@@ -215,6 +197,7 @@ public class Board extends Subject {
 
     /**
      * Returns the position of player in the array.
+     *
      * @param player the player is considered position
      * @return the number of the player's position
      */
@@ -225,9 +208,6 @@ public class Board extends Subject {
             return -1;
         }
     }
-    public void setName(@NotNull String name) {
-        this.name = name;
-    }
 
     public String getName() {
 
@@ -237,8 +217,8 @@ public class Board extends Subject {
 
         } else {
             TextInputDialog dialog = new TextInputDialog();
-            dialog.setTitle("Navn");
-            dialog.setContentText("Indtast dit navn for spillet");
+            dialog.setTitle("Name");
+            dialog.setContentText("Enter the name for the player");
             dialog.showAndWait();
 
             if (dialog.getResult() != null) {
@@ -248,16 +228,7 @@ public class Board extends Subject {
         }
         return null;
     }
-    public Player getPlayerByDB(int i) {
-        if (i >= 0 && i < players.size()) {
-            for (Player player: players) {
-              //  if (player.getDbNo() == i)
-               //     return player;
-            }
-        }
 
-        return null;
-    }
 
     /**
      * Returns the neighbour of the given space of the board in the given heading.
@@ -265,7 +236,7 @@ public class Board extends Subject {
      * (no walls or obstacles in either of the involved spaces); otherwise,
      * null will be returned.
      *
-     * @param space the space for which the neighbour should be computed
+     * @param space   the space for which the neighbour should be computed
      * @param heading the heading of the neighbour
      * @return the space in the given direction; null if there is no (reachable) neighbour
      */
@@ -290,7 +261,9 @@ public class Board extends Subject {
 
         return getSpace(x, y);
     }
-
+    public int getTheNumberOfCheckpoint(){
+        return TheNumberOfCheckpoint;
+    }
     public String getStatusMessage() {
         // this is actually a view aspect, but for making assignment V1 easy for
         // the students, this method gives a string representation of the current
@@ -299,10 +272,11 @@ public class Board extends Subject {
         // XXX: V1 add the move count to the status message
         // XXX: V2 changed the status so that it shows the phase, the current player and the number of steps
         return "Phase: " + getPhase().name() +
-                ", Player = " + getCurrentPlayer().getName() +", Step = " +getCurrentPlayer().board.getStep();
+                ", Player = " + getCurrentPlayer().getName() + ", Step = " + getCurrentPlayer().board.getStep();
 
 
     }
+
 
 
 }
