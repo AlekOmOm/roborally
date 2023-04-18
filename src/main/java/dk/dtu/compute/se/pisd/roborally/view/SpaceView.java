@@ -152,6 +152,7 @@ public class SpaceView extends StackPane implements ViewObserver {
         if (space.getCheckpoint()!= 0) {
             this.setStyle("-fx-background-color: yellow;");
 
+            statusLabel = new Label(String.valueOf(space.getCheckpoint()));
         }
     }
 

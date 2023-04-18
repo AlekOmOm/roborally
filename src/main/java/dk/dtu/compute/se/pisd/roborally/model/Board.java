@@ -251,8 +251,8 @@ public class Board extends Subject {
     public Player getPlayerByDB(int i) {
         if (i >= 0 && i < players.size()) {
             for (Player player: players) {
-                if (player.getDbNo() == i)
-                    return player;
+              //  if (player.getDbNo() == i)
+               //     return player;
             }
         }
 

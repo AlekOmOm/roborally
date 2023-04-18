@@ -35,11 +35,4 @@ public class Checkpoint extends FieldAction {
         return false;
     }
 
-    public int getCheckpointNumber() {
-        return checkpointNumber;
-    }
-
-    public void setCheckpointNumber(int checkpointNumber) {
-        this.checkpointNumber = checkpointNumber;
-    }
 }

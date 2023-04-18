@@ -5,24 +5,25 @@ import dk.dtu.compute.se.pisd.roborally.controller.GameController;
 
 public class Checkpoint extends FieldAction {
 
-    public final int no;
+    private int checkpointNumber;
 
-    public Checkpoint(int no) {
-        this.no = no;
+    public Checkpoint(int checkpointNumber) {
+        this.checkpointNumber = checkpointNumber;
     }
+
 
     @Override
     public boolean doAction(GameController gameController, Space space) {
-        Player player = space.getPlayer();
-        if (player != null) {
-            // there is actually a player on this space
-            player.setLastCheckpoint(this.no);
-            if (player.getLastCheckpoint() >= gameController.board.getCheckpoints().size()) {
-                gameController.initiateWin(player);
+        if (space != null) {
+            Player player = space.getPlayer();
+            if (player != null) {
+                if (player.getCheckpoints() + 1 == checkpointNumber) {
+                    player.setCheckpoints(player.getCheckpoints() + 1);
+                }
+
             }
-
+            return true;
         }
-
-        return true;
+        return false;
     }
 }

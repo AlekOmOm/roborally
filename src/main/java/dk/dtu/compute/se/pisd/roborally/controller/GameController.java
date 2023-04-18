@@ -168,16 +168,15 @@ public class GameController {
                 } else {
                     step++;
                     // --> execute action on fields!
-                    for(Player player: board.getPlayer()){
-                     List<FieldAction> actions =player.getSpace().getActions();
-                     if(actions!=null){
-                         for(FieldAction action : actions){
-                            action.doAction(this,player.getSpace());
-                         }
-                         //if(player.getCheckpoints()==  board.getTotalCheckpoint()){
-                          //  board.setWon(true);
-                         }
-                     }
+                    for (int i = 0; i < board.getPlayersNumber(); i++) {
+                        List<FieldAction> actions = board.getPlayer(i).getSpace().getActions();
+                        if (actions != null) {
+                            for (FieldAction action : actions) {
+                                action.doAction(this, board.getPlayer(i).getSpace());
+                            }
+                            //if(player.getCheckpoints()==  board.getTotalCheckpoint()){
+                            //  board.setWon(true);
+                        }
                     }
                     // -> check checkpoint for alle players
                     step++;
@@ -258,6 +257,7 @@ public class GameController {
 
     /**
      * This method is used to make the current player's movement
+     *
      * @param player the current player.
      */
     // TODO Assignment V2
@@ -312,6 +312,7 @@ public class GameController {
 
     /**
      * This method is used to make the player move twice as fast as normal.
+     *
      * @param player the current player
      */
     // TODO Assignment V2
@@ -323,6 +324,7 @@ public class GameController {
 
     /**
      * This method is used to change the player's direction 90 degrees to the right side.
+     *
      * @param player the current player
      */
     // TODO Assignment V2
@@ -333,6 +335,7 @@ public class GameController {
 
     /**
      * This method is used to change the player's direction 90 degrees to the left side.
+     *
      * @param player the current player
      */
     // TODO Assignment V2
@@ -344,6 +347,7 @@ public class GameController {
 
     /**
      * This method is used to change the player's direction 180 degrees
+     *
      * @param player the current player
      */
 
@@ -352,17 +356,20 @@ public class GameController {
         Heading heading = player.getHeading();
         player.setHeading(heading.next().next());
     }
+
     /**
      * This method is used to make the current player steps back
+     *
      * @param player the current player
      */
     // TODO Assignment A3
     public void stepBack(@NotNull Player player) {
-           uTurn(player);
-           moveForward(player);
-           uTurn(player);
+        uTurn(player);
+        moveForward(player);
+        uTurn(player);
     }
-    public void fasterForward(@NotNull Player player){
+
+    public void fasterForward(@NotNull Player player) {
         moveForward(player);
         moveForward(player);
         moveForward(player);
@@ -370,6 +377,7 @@ public class GameController {
 
     /**
      * This method is used to change the programming card on the card field.
+     *
      * @param source the current card
      * @param target the new card
      * @return true or false for the method execution result.
@@ -385,6 +393,7 @@ public class GameController {
             return false;
         }
     }
+
     public void initiateWin(Player player) {
         Alert winMsg = new Alert(Alert.AlertType.INFORMATION, "Spiller \"" + player.getName() + "\" har vundet spillet.");
         this.won = true;
