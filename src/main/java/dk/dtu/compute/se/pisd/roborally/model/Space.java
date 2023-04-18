@@ -111,6 +111,8 @@ public class Space extends Subject {
 
     }
     public void addConveyorBelt(Heading heading){
+        conveyorBelt =  new ConveyorBelt();
+        conveyorBelt.setHeading(heading);
 
     }
 

@@ -107,10 +107,10 @@ public class SpaceView extends StackPane implements ViewObserver {
     public void updateView(Subject subject) {
         if (subject == this.space) {
             this.getChildren().clear();
-            updateGears();
-            updateConveyorBelt();
             updateWall();
+            updateConveyorBelt();
             updateCheckpoint();
+            updateGears();
             updatePlayer();
         }
     }
@@ -139,6 +139,7 @@ public class SpaceView extends StackPane implements ViewObserver {
     /**
      * Methods are used to determine how the board elements are created in the space.
      */
+    // TODO Conveyorbelt bliver ikke længere vist og ved ikke hvorfor
     public void updateConveyorBelt() {
         ConveyorBelt conveyorBelt = space.getConveyorBelt();
         if (conveyorBelt !=null) {

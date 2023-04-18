@@ -104,7 +104,7 @@ public class LoadBoard {
        // save CommandCardField
         CommandCardFieldTemplate commandCardFieldTemplate = new CommandCardFieldTemplate();
         template.setCommandTemplate(commandCardFieldTemplate);
-
+        // TODO hvordan gemmer man commandcard og programkort i databasen
         // save board
         BoardTemplate boardTemplate = new BoardTemplate();
         template.setBoardTemplate(boardTemplate);
