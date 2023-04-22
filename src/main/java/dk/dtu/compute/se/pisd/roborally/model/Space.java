@@ -42,13 +42,11 @@ public class Space extends Subject {
 
     public final int x;
     public final int y;
-
     private Player player;
-    private int startPlayerNo;
     private List<Heading> walls = new ArrayList<>();
-
     private List<FieldAction> actions = new ArrayList<>();
-    int checkpointNumber;
+    private Checkpoint checkpoint;
+    private int checkpointNumber;
     private ConveyorBelt conveyorBelt;
     private Gear gear;
 
@@ -59,6 +57,7 @@ public class Space extends Subject {
         player = null;
         conveyorBelt=null;
         gear=null;
+        checkpoint=null;
     }
 
     public Player getPlayer() {
@@ -80,7 +79,6 @@ public class Space extends Subject {
             notifyChange();
         }
     }
-
     public List<Heading> getWalls() {
         return walls;
     }
@@ -90,7 +88,6 @@ public class Space extends Subject {
     public Gear getGear(){
         return gear;
     }
-
     public List<FieldAction> getActions() {
         return actions;
     }
@@ -100,27 +97,25 @@ public class Space extends Subject {
         // notify the space of these changes by calling this method.
         notifyChange();
     }
-
     public void addWall(Heading heading) {
         if (!walls.contains(heading)) {
             this.walls.add(heading);
         }
     }
-
     public void addGear(){
-
+        gear =new Gear();
     }
+
     public void addConveyorBelt(Heading heading){
         conveyorBelt =  new ConveyorBelt();
         conveyorBelt.setHeading(heading);
-
     }
-
-    public int getCheckpoint(){
-        return checkpointNumber;
-    }
-    public void setCheckpoint(int checkpointNumber){
-        this.checkpointNumber= checkpointNumber;
+public void addCheckpoint(int checkpointNumber){
+        checkpoint= new Checkpoint();
+        checkpoint.setCheckpoint(checkpointNumber);
+}
+    public Checkpoint getCheckpoint(){
+        return checkpoint;
     }
 
 

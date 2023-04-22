@@ -22,6 +22,7 @@
 package dk.dtu.compute.se.pisd.roborally.fileaccess.model;
 
 
+import dk.dtu.compute.se.pisd.roborally.controller.Checkpoint;
 import dk.dtu.compute.se.pisd.roborally.controller.ConveyorBelt;
 import dk.dtu.compute.se.pisd.roborally.controller.FieldAction;
 import dk.dtu.compute.se.pisd.roborally.controller.Gear;
@@ -41,9 +42,9 @@ public class SpaceTemplate {
     public List<Heading> walls = new ArrayList<>();
     public List<FieldAction> actions = new ArrayList<>();
     public ConveyorBelt conveyorBelt;
-   public Gear gear;
+   public boolean gear;
 
-    public int CheckPoint;
+    public Checkpoint checkpoint;
 
     public int x;
     public int y;

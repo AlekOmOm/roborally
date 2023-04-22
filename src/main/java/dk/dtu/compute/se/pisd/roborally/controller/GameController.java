@@ -169,7 +169,7 @@ public class GameController {
                     board.setCurrentPlayer(board.getPlayer(nextPlayerNumber));
                 } else {
                     step++;
-                    actionFileds(step);
+                    actionFields(step);
                     // --> execute action on fields!
                     // -> check checkpoint for alle players
 
@@ -190,7 +190,7 @@ public class GameController {
             assert false;
         }
     }
-    public void actionFileds(int step){
+    public void actionFields(int step){
         if(step>=Player.NO_REGISTERS){
             for(int i=0; i< board.getPlayersNumber();i++){
                 if(board.getPlayer(i).getSpace().getConveyorBelt()!= null){
@@ -200,7 +200,7 @@ public class GameController {
 
                     board.getPlayer(i).getSpace().getGear().doAction(this,board.getPlayer(i).getSpace());
                 }
-                if(board.getPlayer(i).getSpace().getCheckpoint()== board.getTheNumberOfCheckpoint()){
+                if(board.getPlayer(i).getSpace().getCheckpoint().equals(board.getTheNumberOfCheckpoint())){
 
                     endGame();
                 }

@@ -7,9 +7,9 @@ import org.jetbrains.annotations.NotNull;
 public class Checkpoint extends FieldAction {
     private int checkpointNumber;
 
-    public Checkpoint(int checkpointNumber) {
+    /*public Checkpoint(int checkpointNumber) {
         this.checkpointNumber = checkpointNumber;
-    }
+    }*/
 
 
     /**
@@ -25,7 +25,7 @@ public class Checkpoint extends FieldAction {
         if(space != null){
             Player player = space.getPlayer();
             if(player != null){
-                if(player.getCheckpoints()+1 == checkpointNumber){
+                if(player.getCheckpoints()+1 == getCheckpoint()){
                     player.setCheckpoints(player.getCheckpoints()+1);
                 }
             }
@@ -33,5 +33,11 @@ public class Checkpoint extends FieldAction {
         }
         return false;
     }
+    public int getCheckpoint(){
+        return checkpointNumber;
+    }
 
+    public void setCheckpoint(int checkpointNumber) {
+        this.checkpointNumber=checkpointNumber;
+    }
 }

@@ -22,20 +22,17 @@
 package dk.dtu.compute.se.pisd.roborally.view;
 
 import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
-import dk.dtu.compute.se.pisd.roborally.controller.AppController;
-import dk.dtu.compute.se.pisd.roborally.controller.ConveyorBelt;
-import dk.dtu.compute.se.pisd.roborally.controller.GameController;
+import dk.dtu.compute.se.pisd.roborally.controller.*;
 import dk.dtu.compute.se.pisd.roborally.model.*;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Line;
-import javafx.scene.shape.Polygon;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.StrokeLineCap;
+import javafx.scene.shape.*;
 import javafx.scene.text.Text;
 import org.jetbrains.annotations.NotNull;
 
@@ -70,6 +67,7 @@ public class SpaceView extends StackPane implements ViewObserver {
         this.setPrefHeight(SPACE_HEIGHT);
         this.setMinHeight(SPACE_HEIGHT);
         this.setMaxHeight(SPACE_HEIGHT);
+
 
         this.getChildren().add(statusLabel);
 
@@ -147,7 +145,7 @@ public class SpaceView extends StackPane implements ViewObserver {
                     SPACE_WIDTH/ 2-3, SPACE_HEIGHT -5,
                     SPACE_HEIGHT -5, 0.0);
             try {
-                arrow.setFill(Color.LIGHTGRAY);
+                arrow.setFill(Color.rgb(152,251,152));
             } catch (Exception e) {
                 arrow.setFill(Color.MEDIUMPURPLE);
             }
@@ -157,16 +155,32 @@ public class SpaceView extends StackPane implements ViewObserver {
     }
 
     public void updateGears() {
-
+        Gear gear = space.getGear();
+        if(gear!=null){
+            ImageView imageview =new ImageView();
+            Image image = new Image("Images/gear.png",50,50,false,false);
+            imageview.setImage(image);
+            this.getChildren().add(imageview);
+        }
     }
     /**
      * This method is used to determine how the checkpoints are created in the space.
      */
     public void updateCheckpoint() {
-        if (space.getCheckpoint()!= 0) {
-            this.setStyle("-fx-background-color: yellow;");
+        Checkpoint checkpoint = space.getCheckpoint();
+        if (checkpoint!= null) {
+            Circle circle = new Circle();
+            circle.setCenterX(25);
+            circle.setCenterY(25);
+            circle.setRadius(25);
+            try {
+                circle.setFill(Color.YELLOW);
+            } catch (Exception e) {
+                circle.setFill(Color.MEDIUMPURPLE);
+            }
+            this.getChildren().add(circle);
             Text t =new Text();
-            t.setText(String.valueOf("Check\npoint."+space.getCheckpoint()));
+            t.setText(String.valueOf("Check\npoint."+checkpoint.getCheckpoint()));
            this.getChildren().add(t);
         }
     }
