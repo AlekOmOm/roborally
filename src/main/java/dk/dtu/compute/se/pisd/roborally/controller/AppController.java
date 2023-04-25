@@ -26,16 +26,11 @@ import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
 
 import dk.dtu.compute.se.pisd.roborally.RoboRally;
 
-import dk.dtu.compute.se.pisd.roborally.dal.Repository;
-import dk.dtu.compute.se.pisd.roborally.dal.RepositoryAccess;
+import dk.dtu.compute.se.pisd.roborally.DAL.RepositoryAccess;
 import dk.dtu.compute.se.pisd.roborally.fileaccess.LoadBoard;
 import dk.dtu.compute.se.pisd.roborally.model.*;
 
-import dk.dtu.compute.se.pisd.roborally.view.RoboRallyMenuBar;
 import javafx.application.Platform;
-import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
@@ -44,15 +39,9 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import org.jetbrains.annotations.NotNull;
 
-import java.awt.*;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-
-
-import static dk.dtu.compute.se.pisd.roborally.fileaccess.LoadBoard.saveGame;
-import static dk.dtu.compute.se.pisd.roborally.view.SpaceView.SPACE_HEIGHT;
-import static dk.dtu.compute.se.pisd.roborally.view.SpaceView.SPACE_WIDTH;
 
 /**
  * ...
@@ -128,7 +117,7 @@ public class AppController implements Observer {
         LoadBoard loadboard = new LoadBoard();
         loadboard.loadBoard("game");
         if (gameController == null) {
-            Board board = RepositoryAccess.getRepository().loadGameFromDB(81);
+            Board board = RepositoryAccess.getRepository().loadGameFromDB(2);
             gameController = new GameController(board);
             roboRally.createBoardView(gameController);
         }

@@ -19,7 +19,7 @@
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
  */
-package dk.dtu.compute.se.pisd.roborally.dal;
+package dk.dtu.compute.se.pisd.roborally.DAL;
 
 /**
  * ...
@@ -27,15 +27,19 @@ package dk.dtu.compute.se.pisd.roborally.dal;
  * @author Ekkart Kindler, ekki@dtu.dk
  *
  */
-public class RepositoryAccess {
+public class GameInDB {
 
-    private static Repository repository;
+    public final int id;
+    public final String name;
 
-    public static IRepository getRepository() {
-        if(repository == null) {
-            repository = new Repository(new Connector());
-        }
-        return repository;
+    public GameInDB(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return id + ": " + name;
     }
 
 }

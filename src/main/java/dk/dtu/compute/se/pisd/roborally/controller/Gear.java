@@ -2,6 +2,8 @@ package dk.dtu.compute.se.pisd.roborally.controller;
 
 import dk.dtu.compute.se.pisd.roborally.controller.FieldAction;
 import dk.dtu.compute.se.pisd.roborally.controller.GameController;
+import dk.dtu.compute.se.pisd.roborally.model.Heading;
+import dk.dtu.compute.se.pisd.roborally.model.Player;
 import dk.dtu.compute.se.pisd.roborally.model.Space;
 import org.jetbrains.annotations.NotNull;
 
@@ -15,8 +17,16 @@ public class Gear extends FieldAction {
      * @return
      */
     public boolean doAction(@NotNull GameController gameController, @NotNull Space space) {
-       space.getPlayer().getHeading().prev();
-        return true;
+        Player player = space.getPlayer();
+        if (player != null){
+            //Heading heading = player.getHeading();
+            //turn to right
+            //Heading newHeading = player.getHeading().next();
+            player.setHeading(player.getHeading().next());
+            return true;
+        }
+       //space.getPlayer().getHeading().prev();
+        return false;
     }
 
 }

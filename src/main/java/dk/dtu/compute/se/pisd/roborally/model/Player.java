@@ -43,7 +43,7 @@ public class Player extends Subject {
 
     private String name;
     private String color;
-
+    private int dbNo;
     private Space space;
     private Heading heading = SOUTH;
 
@@ -157,5 +157,7 @@ public class Player extends Subject {
         this.checkpoint=checkpoint;
 
     }
-
+    public void setDbNo(int dbNo) {
+        this.dbNo = dbNo;
+    }
 }
