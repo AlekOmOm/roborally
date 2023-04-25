@@ -258,7 +258,6 @@ public class Board extends Subject {
                 x = (x + 1) % width;
                 break;
         }
-
         return getSpace(x, y);
     }
     public int getTheNumberOfCheckpoint(){

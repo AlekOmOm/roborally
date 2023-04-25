@@ -24,36 +24,37 @@ CREATE TABLE IF NOT EXISTS Player (
     positionX int,
     positionY int,
     heading tinyint,
-    forder int,
-    last_checkpoint int,
 
     PRIMARY KEY (gameID, playerID),
     FOREIGN KEY (gameID) REFERENCES Game(gameID)
     );;
 
-create table if not exists playerHand (
+create table if not exists commandCard (
     playerID tinyint not null,
     gameID int not null,
+    card0 varchar(255) not null,
+    card1 varchar(255) not null,
+    card2 varchar(255) not null,
+    card3 varchar(255) not null,
+    card4 varchar(255) not null,
+    card5 varchar(255) not null,
+    card6 varchar(255) not null,
+    card7 varchar(255) not null,
+    PRIMARY KEY (gameID, playerID),
+    FOREIGN KEY (gameID) REFERENCES Game(gameID)
+    );;
+
+create table if not exists programCard (
+    playerID tinyint not null,
+    gameID int not null,
+
     card0 varchar(255),
     card1 varchar(255),
     card2 varchar(255),
     card3 varchar(255),
     card4 varchar(255),
-    card5 varchar(255),
-    card6 varchar(255),
-    card7 varchar(255)
-
-    );;
-
-create table if not exists playerRegister (
-    playerID tinyint not null,
-    gameID int not null,
-
-    card0 varchar(255),
-    card1 varchar(255),
-    card2 varchar(255),
-    card3 varchar(255),
-    card4 varchar(255)
+    PRIMARY KEY (gameID, playerID),
+    FOREIGN KEY (gameID) REFERENCES Game(gameID)
     );;
 
 SET FOREIGN_KEY_CHECKS = 1;;

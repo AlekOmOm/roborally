@@ -19,7 +19,7 @@
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
  */
-package dk.dtu.compute.se.pisd.roborally.dal;
+package dk.dtu.compute.se.pisd.roborally.DAL;
 
 import com.mysql.cj.util.StringUtils;
 import dk.dtu.compute.se.pisd.roborally.fileaccess.IOUtil;
@@ -29,8 +29,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import static dk.dtu.compute.se.pisd.roborally.dal.UserNamesAndPasswords.DB_PWD;
-import static dk.dtu.compute.se.pisd.roborally.dal.UserNamesAndPasswords.DB_USER;
+import static dk.dtu.compute.se.pisd.roborally.DAL.UserNamesAndPasswords.DB_PWD;
+import static dk.dtu.compute.se.pisd.roborally.DAL.UserNamesAndPasswords.DB_USER;
 
 /**
  * ...

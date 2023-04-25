@@ -19,10 +19,11 @@
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
  */
-package dk.dtu.compute.se.pisd.roborally.dal;
+package dk.dtu.compute.se.pisd.roborally.DAL;
 
 import dk.dtu.compute.se.pisd.roborally.fileaccess.LoadBoard;
 import dk.dtu.compute.se.pisd.roborally.model.*;
+import javafx.scene.control.Alert;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -62,6 +63,8 @@ public class Repository implements IRepository {
     private static final String PLAYER_HEADING = "heading";
 
     private Connector connector;
+    private int j;
+
 
     Repository(Connector connector){
         this.connector = connector;
@@ -97,15 +100,16 @@ public class Repository implements IRepository {
                 }
                 generatedKeys.close();
 
-                // Enable foreign key constraint check again:
-                // statement.execute("SET foreign_key_checks = 1");
+                //Enable foreign key constraint check again:
+                //statement.execute("SET foreign_key_checks = 1");
                 // statement.close();
 
                 createPlayersInDB(game);
-				/* TOODO this method needs to be implemented first
+                createCommandCardInDB(game);
+                createProgramCardInDB(game);
+				/* TODO this method needs to be implemented first
 				createCardFieldsInDB(game);
 				 */
-
                 // since current player is a foreign key, it can only be
                 // inserted after the players are created, since MySQL does
                 // not have a per transaction validation, but validates on
@@ -119,12 +123,13 @@ public class Repository implements IRepository {
                     rs.updateRow();
                 } else {
                     // TODO error handling
+                    showError("An error occurred while updating the current player in the database");
                 }
                 rs.close();
-
                 connection.commit();
                 connection.setAutoCommit(true);
                 return true;
+
             } catch (SQLException e) {
                 // TODO error handling
                 e.printStackTrace();
@@ -142,6 +147,7 @@ public class Repository implements IRepository {
             System.err.println("Game cannot be created in DB, since it has a game id already!");
         }
         return false;
+
     }
 
     @Override
@@ -271,6 +277,7 @@ public class Repository implements IRepository {
         return result;
     }
 
+
     private void createPlayersInDB(Board game) throws SQLException {
         // TODO code should be more defensive
         PreparedStatement ps = getSelectPlayersStatementU();
@@ -344,7 +351,106 @@ public class Repository implements IRepository {
 
         // TODO error handling/consistency check: check whether all players were updated
     }
+    /**
+     *
+     * @author Martin Sven Poulsen, S186075
+     */
+    private void createCommandCardInDB(Board game) throws SQLException {
 
+        for (int i = 0; i < game.getPlayersNumber(); i++) {
+            // for løkke 0..7: j
+            PreparedStatement ps1 = getCreateCommandCardStatement();
+            Player player = game.getPlayer(i);
+            ps1.setInt(1, i);
+            ps1.setInt(2, game.getGameId());
+            // ps1.setInt(3, j);
+
+            CommandCard card = player.getCardField(0).getCard();
+            if (card == null) {
+                ps1.setString(3, null);
+            } else {
+                ps1.setString(3, player.getCardField(0).getCard().command.toString());
+            }
+            if (card == null) {
+                ps1.setString(4, null);
+            } else {
+                ps1.setString(4, player.getCardField(1).getCard().command.toString());
+            }
+            if (card == null) {
+                ps1.setString(5, null);
+            } else {
+                ps1.setString(5, player.getCardField(2).getCard().command.toString());
+            }
+            if (card == null) {
+                ps1.setString(6, null);
+            } else {
+                ps1.setString(6, player.getCardField(3).getCard().command.toString());
+            }
+            if (card == null) {
+                ps1.setString(7, null);
+            } else {
+                ps1.setString(7, player.getCardField(4).getCard().command.toString());
+            }
+            if (card == null) {
+                ps1.setString(8, null);
+            } else {
+                ps1.setString(8, player.getCardField(5).getCard().command.toString());
+            }
+            if (card == null) {
+                ps1.setString(9, null);
+            } else {
+                ps1.setString(9, player.getCardField(6).getCard().command.toString());
+            }
+            if (card == null) {
+                ps1.setString(10, null);
+            } else {
+                ps1.setString(10, player.getCardField(7).getCard().command.toString());
+            }
+            ps1.execute();
+
+        }
+    }
+    /**
+     * @author Martin Sven Poulsen, S186075
+     */
+    private void createProgramCardInDB(Board game) throws  SQLException {
+        PreparedStatement ps2 = getCreateProgramCardStatement();
+        for (int i = 0; i < game.getPlayersNumber(); i++) {
+            // for løkke 0..7: j
+            Player player = game.getPlayer(i);
+            ps2.setInt(1, i);
+            ps2.setInt(2, game.getGameId());
+            CommandCard card = player.getProgramField(0).getCard();
+            if (card == null) {
+                ps2.setString(3, null);
+            } else {
+                ps2.setString(3, player.getProgramField(0).getCard().command.toString());
+            }
+            if (card == null) {
+                ps2.setString(4, null);
+            } else {
+                ps2.setString(4, player.getProgramField(1).getCard().command.toString());
+            }
+            if (card == null) {
+                ps2.setString(5, null);
+            } else {
+                ps2.setString(5, player.getProgramField(2).getCard().command.toString());
+            }
+            if (card == null) {
+                ps2.setString(6, null);
+            } else {
+                ps2.setString(6, player.getProgramField(3).getCard().command.toString());
+            }
+            if (card == null) {
+                ps2.setString(7, null);
+            } else {
+                ps2.setString(7, player.getProgramField(4).getCard().command.toString());
+            }
+        }
+        // TOFO tilføj alle kort
+        ps2.execute();
+        ps2.close();
+    }
     private static final String SQL_INSERT_GAME =
             "INSERT INTO Game(name, currentPlayer, phase, step) VALUES (?, ?, ?, ?)";
 
@@ -445,8 +551,48 @@ public class Repository implements IRepository {
         }
         return select_games_stmt;
     }
+    /**
+     * @author Martin Sven Poulsen, S186075
+     */
+    private static final String SQL_CREATE_COMMAND_CARD =
+            "INSERT INTO commandCard(playerID, gameID, card0, card1, card2, card3, card4, card5, card6, card7) VALUES (?,?,?,?,?,?,?,?,?,?)";
+    private PreparedStatement create_Command_Card_stmt = null;
+    private PreparedStatement getCreateCommandCardStatement() {
+        if (create_Command_Card_stmt == null) {
+            Connection connection = connector.getConnection();
+            try {
+                create_Command_Card_stmt = connection.prepareStatement(SQL_CREATE_COMMAND_CARD);
+            } catch (SQLException e) {
+                // TODO error handling
+                e.printStackTrace();
+            }
+        }
+        return create_Command_Card_stmt;
+    }
+    /**
+     * @author Martin Sven Poulsen, S186075
+     */
+    private static final String SQL_CREATE_PROGRAM_CARD =
+            "INSERT INTO programCard(playerID, gameID, card0, card1, card2, card3, card4) VALUES (?,?,?,?,?,?,?)";
 
+    private PreparedStatement create_program_card_stmt = null;
 
+    private PreparedStatement getCreateProgramCardStatement() {
+        if (create_program_card_stmt == null) {
+            Connection connection = connector.getConnection();
+            try {
+                create_program_card_stmt = connection.prepareStatement(SQL_CREATE_PROGRAM_CARD);
+            } catch (SQLException e) {
+                // TODO error handling
+                e.printStackTrace();
+            }
+        }
+        return create_program_card_stmt;
+    }
+    private void showError(String error) {
+        Alert alert = new Alert(Alert.AlertType.ERROR, error);
+        alert.showAndWait();
+    }
 
 }
 
