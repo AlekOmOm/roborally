@@ -1,0 +1,479 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="1236.681045353808" y="202.9128120885587">dk.dtu.compute.se.pisd.roborally.model.CommandCardField</node>
+    <node x="1527.0635056469964" y="985.4773768255593">dk.dtu.compute.se.pisd.roborally.model.Board</node>
+    <node x="156.92908410069109" y="716.5365563036314">dk.dtu.compute.se.pisd.roborally.view.CardFieldView.OnDragDoneHandler</node>
+    <node x="1520.7270761104442" y="184.61965620930349">dk.dtu.compute.se.pisd.roborally.model.Heading</node>
+    <node x="1852.7808706939468" y="495.5738873880608">dk.dtu.compute.se.pisd.roborally.controller.Gear</node>
+    <node x="1299.8587472464274" y="1916.4932161228671">dk.dtu.compute.se.pisd.roborally.view.BoardView</node>
+    <node x="1531.4591878985939" y="1536.5913429447908">dk.dtu.compute.se.pisd.roborally.controller.AppController</node>
+    <node x="1060.8008600988878" y="931.8363999959529">dk.dtu.compute.se.pisd.roborally.controller.GameController</node>
+    <node x="926.0215655384591" y="653.9271506132019">dk.dtu.compute.se.pisd.roborally.view.CardFieldView.OnDragEnteredHandler</node>
+    <node x="588.1133060942233" y="757.3574098036554">dk.dtu.compute.se.pisd.roborally.view.CardFieldView.OnDragDetectedHandler</node>
+    <node x="700.4815113711905" y="514.4049152451095">dk.dtu.compute.se.pisd.roborally.view.CardFieldView.OnDragOverHandler</node>
+    <node x="1017.233601256333" y="1810.40502621295">dk.dtu.compute.se.pisd.roborally.view.SpaceView</node>
+    <node x="937.4792145932372" y="332.56284994707204">dk.dtu.compute.se.pisd.roborally.view.CardFieldView.OnDragExitedHandler</node>
+    <node x="1557.8250196601814" y="1833.8300155822144">dk.dtu.compute.se.pisd.roborally.view.RoboRallyMenuBar</node>
+    <node x="1836.8577312535106" y="652.743864243625">dk.dtu.compute.se.pisd.roborally.model.Space</node>
+    <node x="2032.2635729342182" y="190.93771577330813">dk.dtu.compute.se.pisd.roborally.model.CommandCard</node>
+    <node x="1591.698216962101" y="765.4354147857025">dk.dtu.compute.se.pisd.roborally.model.Phase</node>
+    <node x="1189.6984745976065" y="445.8837447341242">dk.dtu.compute.se.pisd.roborally.model.Player</node>
+    <node x="1274.1038074783655" y="1727.502053826339">dk.dtu.compute.se.pisd.roborally.view.BoardView.SpaceEventHandler</node>
+    <node x="1897.8817398979695" y="-12.293337461687443">dk.dtu.compute.se.pisd.roborally.model.Command</node>
+    <node x="1404.8308606445805" y="830.3881082973027">dk.dtu.compute.se.pisd.roborally.controller.Antenna</node>
+    <node x="2155.1043878089886" y="636.7266770177282">dk.dtu.compute.se.pisd.roborally.controller.Checkpoint</node>
+    <node x="240.49054147116317" y="1187.6068776109503">dk.dtu.compute.se.pisd.roborally.view.PlayersView</node>
+    <node x="187.74832882441677" y="884.5098217010203">dk.dtu.compute.se.pisd.roborally.view.CardFieldView</node>
+    <node x="-86.32427886558462" y="728.8257031635446">dk.dtu.compute.se.pisd.roborally.view.ViewObserver</node>
+    <node x="1514.0503330088043" y="479.33938405549054">dk.dtu.compute.se.pisd.roborally.controller.ConveyorBelt</node>
+    <node x="1826.7080573738624" y="348.97589398077463">dk.dtu.compute.se.pisd.roborally.controller.FieldAction</node>
+    <node x="244.74590591701963" y="1061.7406387293463">dk.dtu.compute.se.pisd.roborally.view.PlayerView</node>
+    <node x="361.6588838521964" y="585.6571735434484">dk.dtu.compute.se.pisd.roborally.view.CardFieldView.OnDragDroppedHandler</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="dk.dtu.compute.se.pisd.roborally.model.Player" target="dk.dtu.compute.se.pisd.roborally.model.Space" relationship="TO_ONE">
+      <point x="14.999525402393601" y="127.50025526587581" />
+      <point x="1336.698" y="914.336" />
+      <point x="1485.0" y="914.336" />
+      <point x="1485.0" y="1425.977" />
+      <point x="1944.858" y="1425.977" />
+      <point x="2.6874648938246537E-4" y="169.50013575637502" />
+    </edge>
+    <edge source="dk.dtu.compute.se.pisd.roborally.model.Space" target="dk.dtu.compute.se.pisd.roborally.model.Player" relationship="TO_ONE">
+      <point x="-107.99973125351062" y="-16.743864243625012" />
+      <point x="1810.0" y="805.5" />
+      <point x="1810.0" y="461.839" />
+      <point x="131.9995254023936" y="-111.54474473412421" />
+    </edge>
+    <edge source="dk.dtu.compute.se.pisd.roborally.view.SpaceView" target="dk.dtu.compute.se.pisd.roborally.model.Space" relationship="TO_ONE">
+      <point x="94.50039874366689" y="-15.405026212949906" />
+      <point x="1485.0" y="1893.5" />
+      <point x="1485.0" y="1425.977" />
+      <point x="1944.858" y="1425.977" />
+      <point x="2.6874648938246537E-4" y="169.50013575637502" />
+    </edge>
+    <edge source="dk.dtu.compute.se.pisd.roborally.controller.AppController" target="dk.dtu.compute.se.pisd.roborally.controller.GameController" relationship="TO_ONE">
+      <point x="-82.00018789859382" y="28.244657055209245" />
+      <point x="798.0" y="1678.336" />
+      <point x="798.0" y="1296.336" />
+      <point x="-187.9998600988879" y="-3.9999595287554257E-4" />
+    </edge>
+    <edge source="dk.dtu.compute.se.pisd.roborally.view.PlayerView" target="dk.dtu.compute.se.pisd.roborally.model.Player" relationship="TO_ONE">
+      <point x="91.50009408298035" y="3.61270653684187E-4" />
+      <point x="900.982" y="1090.241" />
+      <point x="900.982" y="428.384" />
+      <point x="1810.0" y="428.384" />
+      <point x="1810.0" y="461.839" />
+      <point x="131.9995254023936" y="-111.54474473412421" />
+    </edge>
+    <edge source="dk.dtu.compute.se.pisd.roborally.view.CardFieldView.OnDragOverHandler" target="dk.dtu.compute.se.pisd.roborally.view.CardFieldView" relationship="INNER_CLASS">
+      <point x="-91.49951137119058" y="8.475489050852048E-5" />
+      <point x="636.0" y="542.905" />
+      <point x="636.0" y="735.0" />
+      <point x="365.5" y="735.0" />
+      <point x="3.751671175583226" y="-56.49982170102032" />
+    </edge>
+    <edge source="dk.dtu.compute.se.pisd.roborally.controller.GameController" target="dk.dtu.compute.se.pisd.roborally.view.PlayersView" relationship="CREATE">
+      <point x="188.0001399011121" y="-3.9999595287554257E-4" />
+      <point x="1507.0" y="1296.336" />
+      <point x="1507.0" y="1693.336" />
+      <point x="740.0" y="1693.336" />
+      <point x="740.0" y="1231.107" />
+      <point x="91.50045852883682" y="15.000122389049693" />
+    </edge>
+    <edge source="dk.dtu.compute.se.pisd.roborally.controller.Gear" target="dk.dtu.compute.se.pisd.roborally.controller.FieldAction" relationship="GENERALIZATION">
+      <point x="134.50012930605317" y="1.1261193913014722E-4" />
+      <point x="2139.0" y="524.074" />
+      <point x="2139.0" y="377.476" />
+      <point x="134.49994262613768" y="1.0601922537034625E-4" />
+    </edge>
+    <edge source="dk.dtu.compute.se.pisd.roborally.view.CardFieldView" target="dk.dtu.compute.se.pisd.roborally.view.CardFieldView.OnDragDetectedHandler" relationship="CREATE">
+      <point x="118.91067117558322" y="-56.5" />
+      <point x="480.659" y="766.0365563036314" />
+      <point x="-106.5" y="-19.820853500023986" />
+    </edge>
+    <edge source="dk.dtu.compute.se.pisd.roborally.controller.AppController" target="dk.dtu.compute.se.pisd.roborally.model.Player" relationship="CREATE">
+      <point x="82.0" y="29.999657055209127" />
+      <point x="2456.604" y="1680.091" />
+      <point x="2456.604" y="-59.79333746168744" />
+      <point x="1436.181045353808" y="-59.79333746168744" />
+      <point x="114.48257075620154" y="-127.5" />
+    </edge>
+    <edge source="dk.dtu.compute.se.pisd.roborally.view.CardFieldView" target="dk.dtu.compute.se.pisd.roborally.view.CardFieldView.OnDragEnteredHandler" relationship="CREATE">
+      <point x="174.00000000000006" y="-26.6738217010203" />
+      <point x="984.734" y="914.336" />
+      <point x="-42.787565538459035" y="28.5" />
+    </edge>
+    <edge source="dk.dtu.compute.se.pisd.roborally.controller.GameController" target="dk.dtu.compute.se.pisd.roborally.model.CommandCard" relationship="CREATE">
+      <point x="-76.60238550128133" y="-364.5" />
+      <point x="1172.1984745976065" y="-89.79333746168744" />
+      <point x="2137.764" y="-89.79333746168744" />
+      <point x="30.000427065781878" y="-28.5" />
+    </edge>
+    <edge source="dk.dtu.compute.se.pisd.roborally.controller.Checkpoint" target="dk.dtu.compute.se.pisd.roborally.controller.FieldAction" relationship="GENERALIZATION">
+      <point x="-134.50038780898876" y="3.229822717685238E-4" />
+      <point x="2139.0" y="680.227" />
+      <point x="2139.0" y="377.476" />
+      <point x="134.49994262613768" y="1.0601922537034625E-4" />
+    </edge>
+    <edge source="dk.dtu.compute.se.pisd.roborally.view.CardFieldView" target="dk.dtu.compute.se.pisd.roborally.model.CommandCardField" relationship="TO_ONE">
+      <point x="-174.00032882441678" y="-14.999821701020323" />
+      <point x="-103.824" y="926.01" />
+      <point x="-103.824" y="123.207" />
+      <point x="820.5" y="123.207" />
+      <point x="820.5" y="311.0" />
+      <point x="1342.681" y="311.0" />
+      <point x="14.999954646192009" y="42.500187911441316" />
+    </edge>
+    <edge source="dk.dtu.compute.se.pisd.roborally.model.Board" target="dk.dtu.compute.se.pisd.roborally.model.Phase" relationship="TO_ONE">
+      <point x="23.134711315104596" y="-211.5" />
+      <point x="0.0" y="42.5" />
+    </edge>
+    <edge source="dk.dtu.compute.se.pisd.roborally.view.BoardView" target="dk.dtu.compute.se.pisd.roborally.view.PlayersView" relationship="TO_ONE">
+      <point x="15.000252753572568" y="28.5" />
+      <point x="1406.359" y="2039.905" />
+      <point x="331.99054147116317" y="2039.905" />
+      <point x="0.0" y="28.5" />
+    </edge>
+    <edge source="dk.dtu.compute.se.pisd.roborally.view.CardFieldView" target="dk.dtu.compute.se.pisd.roborally.view.ViewObserver" relationship="REALIZATION">
+      <point x="-174.00032882441678" y="1.7829897967658326E-4" />
+      <point x="158.0" y="941.01" />
+      <point x="158.0" y="796.5" />
+      <point x="91.50027886558462" y="25.17429683645537" />
+    </edge>
+    <edge source="dk.dtu.compute.se.pisd.roborally.model.Player" target="dk.dtu.compute.se.pisd.roborally.model.CommandCardField" relationship="CREATE">
+      <point x="35.98252540239355" y="-127.5" />
+      <point x="29.99995464619201" y="42.49999999999997" />
+    </edge>
+    <edge source="dk.dtu.compute.se.pisd.roborally.model.Space" target="dk.dtu.compute.se.pisd.roborally.model.Board" relationship="TO_ONE">
+      <point x="-107.99973125351062" y="1.3575637501617166E-4" />
+      <point x="1793.0" y="822.244" />
+      <point x="1793.0" y="1196.977" />
+      <point x="122.50049435300366" y="-3.7682555921492167E-4" />
+    </edge>
+    <edge source="dk.dtu.compute.se.pisd.roborally.model.Space" target="dk.dtu.compute.se.pisd.roborally.controller.Gear" relationship="CREATE">
+      <point x="-15.0" y="-169.5" />
+      <point x="-57.423139440436216" y="28.5" />
+    </edge>
+    <edge source="dk.dtu.compute.se.pisd.roborally.view.CardFieldView.OnDragExitedHandler" target="dk.dtu.compute.se.pisd.roborally.view.CardFieldView" relationship="INNER_CLASS">
+      <point x="-96.00021459323716" y="1.5005292794967318E-4" />
+      <point x="636.0" y="361.063" />
+      <point x="636.0" y="735.0" />
+      <point x="365.5" y="735.0" />
+      <point x="3.751671175583226" y="-56.49982170102032" />
+    </edge>
+    <edge source="dk.dtu.compute.se.pisd.roborally.view.BoardView" target="dk.dtu.compute.se.pisd.roborally.view.SpaceView" relationship="TO_MANY">
+      <point x="-91.5" y="0.0" />
+      <point x="94.5" y="36.08818990991722" />
+    </edge>
+    <edge source="dk.dtu.compute.se.pisd.roborally.model.Space" target="dk.dtu.compute.se.pisd.roborally.controller.FieldAction" relationship="TO_MANY">
+      <point x="108.00000000000023" y="0.0" />
+      <point x="2471.604" y="822.243864243625" />
+      <point x="2471.604" y="362.476" />
+      <point x="134.49999999999977" y="-14.99989398077463" />
+    </edge>
+    <edge source="dk.dtu.compute.se.pisd.roborally.view.BoardView" target="dk.dtu.compute.se.pisd.roborally.view.BoardView.SpaceEventHandler" relationship="CREATE">
+      <point x="15.0" y="-28.5" />
+      <point x="41.25493976806183" y="28.5" />
+    </edge>
+    <edge source="dk.dtu.compute.se.pisd.roborally.view.CardFieldView" target="dk.dtu.compute.se.pisd.roborally.view.CardFieldView.OnDragExitedHandler" relationship="CREATE">
+      <point x="-174.0" y="15.000178298979677" />
+      <point x="-118.824" y="956.01" />
+      <point x="-118.824" y="346.063" />
+      <point x="-96.0" y="-14.99984994707205" />
+    </edge>
+    <edge source="dk.dtu.compute.se.pisd.roborally.view.BoardView" target="dk.dtu.compute.se.pisd.roborally.model.Board" relationship="TO_ONE">
+      <point x="91.50025275357257" y="-2.161228671866411E-4" />
+      <point x="1793.0" y="1944.993" />
+      <point x="1793.0" y="1196.977" />
+      <point x="122.50049435300366" y="-3.7682555921492167E-4" />
+    </edge>
+    <edge source="dk.dtu.compute.se.pisd.roborally.model.Space" target="dk.dtu.compute.se.pisd.roborally.controller.Checkpoint" relationship="CREATE">
+      <point x="108.00000000000023" y="-127.01686424362504" />
+      <point x="-134.5" y="15.000322982271769" />
+    </edge>
+    <edge source="dk.dtu.compute.se.pisd.roborally.model.Player" target="dk.dtu.compute.se.pisd.roborally.model.Board" relationship="TO_ONE">
+      <point x="-4.7459760639867454E-4" y="127.50025526587581" />
+      <point x="1321.698" y="895.0" />
+      <point x="1793.0" y="895.0" />
+      <point x="1793.0" y="1196.977" />
+      <point x="122.50049435300366" y="-3.7682555921492167E-4" />
+    </edge>
+    <edge source="dk.dtu.compute.se.pisd.roborally.view.CardFieldView" target="dk.dtu.compute.se.pisd.roborally.view.CardFieldView.OnDragDroppedHandler" relationship="CREATE">
+      <point x="88.91067117558322" y="-56.5" />
+      <point x="-14.999883852196433" y="28.5" />
+    </edge>
+    <edge source="dk.dtu.compute.se.pisd.roborally.model.Space" target="dk.dtu.compute.se.pisd.roborally.controller.Checkpoint" relationship="TO_ONE">
+      <point x="108.00000000000023" y="-157.01686424362504" />
+      <point x="-134.5" y="-14.999677017728231" />
+    </edge>
+    <edge source="dk.dtu.compute.se.pisd.roborally.model.Space" target="dk.dtu.compute.se.pisd.roborally.controller.Gear" relationship="TO_ONE">
+      <point x="42.423139440436216" y="-169.5" />
+      <point x="0.0" y="28.5" />
+    </edge>
+    <edge source="dk.dtu.compute.se.pisd.roborally.view.PlayersView" target="dk.dtu.compute.se.pisd.roborally.model.Board" relationship="TO_ONE">
+      <point x="91.50045852883682" y="1.223890496930835E-4" />
+      <point x="999.734" y="1216.107" />
+      <point x="999.734" y="895.0" />
+      <point x="1793.0" y="895.0" />
+      <point x="1793.0" y="1196.977" />
+      <point x="122.50049435300366" y="-3.7682555921492167E-4" />
+    </edge>
+    <edge source="dk.dtu.compute.se.pisd.roborally.view.BoardView" target="dk.dtu.compute.se.pisd.roborally.view.PlayersView" relationship="CREATE">
+      <point x="91.50025275357257" y="14.999783877132813" />
+      <point x="1507.0" y="1959.993" />
+      <point x="1507.0" y="1693.336" />
+      <point x="740.0" y="1693.336" />
+      <point x="740.0" y="1231.107" />
+      <point x="91.50045852883682" y="15.000122389049693" />
+    </edge>
+    <edge source="dk.dtu.compute.se.pisd.roborally.view.BoardView" target="dk.dtu.compute.se.pisd.roborally.view.SpaceView" relationship="CREATE">
+      <point x="-91.5" y="15.0" />
+      <point x="94.5" y="51.08818990991722" />
+    </edge>
+    <edge source="dk.dtu.compute.se.pisd.roborally.model.CommandCardField" target="dk.dtu.compute.se.pisd.roborally.model.Player" relationship="TO_ONE">
+      <point x="-4.535380799097766E-5" y="42.500187911441316" />
+      <point x="1327.681" y="382.063" />
+      <point x="1810.0" y="382.063" />
+      <point x="1810.0" y="461.839" />
+      <point x="131.9995254023936" y="-111.54474473412421" />
+    </edge>
+    <edge source="dk.dtu.compute.se.pisd.roborally.controller.ConveyorBelt" target="dk.dtu.compute.se.pisd.roborally.model.Heading" relationship="TO_ONE">
+      <point x="-134.50033300880432" y="-3.840554904854798E-4" />
+      <point x="1484.0" y="522.839" />
+      <point x="1484.0" y="255.12" />
+      <point x="-86.50007611044407" y="3.437906965189086E-4" />
+    </edge>
+    <edge source="dk.dtu.compute.se.pisd.roborally.model.Player" target="dk.dtu.compute.se.pisd.roborally.model.CommandCardField" relationship="TO_MANY">
+      <point x="-9.017474597606451" y="-127.49974473412419" />
+      <point x="1312.681" y="311.0" />
+      <point x="1342.681" y="311.0" />
+      <point x="14.999954646192009" y="42.500187911441316" />
+    </edge>
+    <edge source="dk.dtu.compute.se.pisd.roborally.view.PlayerView" target="dk.dtu.compute.se.pisd.roborally.controller.GameController" relationship="TO_ONE">
+      <point x="91.50009408298035" y="-14.999638729346316" />
+      <point x="798.0" y="1075.241" />
+      <point x="798.0" y="1296.336" />
+      <point x="-187.9998600988879" y="-3.9999595287554257E-4" />
+    </edge>
+    <edge source="dk.dtu.compute.se.pisd.roborally.model.Space" target="dk.dtu.compute.se.pisd.roborally.model.Heading" relationship="TO_MANY">
+      <point x="-107.99973125351062" y="-74.30886424362507" />
+      <point x="1484.0" y="747.935" />
+      <point x="1484.0" y="255.12" />
+      <point x="-86.50007611044407" y="3.437906965189086E-4" />
+    </edge>
+    <edge source="dk.dtu.compute.se.pisd.roborally.model.Board" target="dk.dtu.compute.se.pisd.roborally.model.Player" relationship="TO_MANY">
+      <point x="122.50049435300366" y="14.999623174440785" />
+      <point x="1810.0" y="1211.977" />
+      <point x="1810.0" y="461.839" />
+      <point x="131.9995254023936" y="-111.54474473412421" />
+    </edge>
+    <edge source="dk.dtu.compute.se.pisd.roborally.view.PlayerView" target="dk.dtu.compute.se.pisd.roborally.view.ViewObserver" relationship="REALIZATION">
+      <point x="-91.49990591701962" y="3.61270653684187E-4" />
+      <point x="158.0" y="1090.241" />
+      <point x="158.0" y="796.5" />
+      <point x="91.50027886558462" y="25.17429683645537" />
+    </edge>
+    <edge source="dk.dtu.compute.se.pisd.roborally.view.PlayersView" target="dk.dtu.compute.se.pisd.roborally.view.PlayerView" relationship="CREATE">
+      <point x="4.255364445856458" y="-28.5" />
+      <point x="0.0" y="28.5" />
+    </edge>
+    <edge source="dk.dtu.compute.se.pisd.roborally.view.BoardView" target="dk.dtu.compute.se.pisd.roborally.view.BoardView.SpaceEventHandler" relationship="TO_ONE">
+      <point x="-26.25493976806183" y="-28.5" />
+      <point x="0.0" y="28.5" />
+    </edge>
+    <edge source="dk.dtu.compute.se.pisd.roborally.view.CardFieldView" target="dk.dtu.compute.se.pisd.roborally.view.CardFieldView.OnDragOverHandler" relationship="CREATE">
+      <point x="174.00000000000006" y="-46.009821701020314" />
+      <point x="818.6133060942233" y="895.0" />
+      <point x="26.631794723032726" y="28.5" />
+    </edge>
+    <edge source="dk.dtu.compute.se.pisd.roborally.view.CardFieldView.OnDragDetectedHandler" target="dk.dtu.compute.se.pisd.roborally.view.CardFieldView" relationship="INNER_CLASS">
+      <point x="-3.0609422321958846E-4" y="-28.50040980365543" />
+      <point x="694.613" y="735.0" />
+      <point x="365.5" y="735.0" />
+      <point x="3.751671175583226" y="-56.49982170102032" />
+    </edge>
+    <edge source="dk.dtu.compute.se.pisd.roborally.view.RoboRallyMenuBar" target="dk.dtu.compute.se.pisd.roborally.controller.AppController" relationship="TO_ONE">
+      <point x="-31.865831761587515" y="-28.5" />
+      <point x="0.0" y="113.5" />
+    </edge>
+    <edge source="dk.dtu.compute.se.pisd.roborally.model.Space" target="dk.dtu.compute.se.pisd.roborally.controller.ConveyorBelt" relationship="TO_ONE">
+      <point x="-108.0" y="-128.8601195095008" />
+      <point x="1633.55" y="693.3837447341242" />
+      <point x="-15.000333008804319" y="43.5" />
+    </edge>
+    <edge source="dk.dtu.compute.se.pisd.roborally.view.PlayerView" target="dk.dtu.compute.se.pisd.roborally.view.CardFieldView" relationship="CREATE">
+      <point x="25.502422907397147" y="-28.5" />
+      <point x="0.0" y="56.5" />
+    </edge>
+    <edge source="dk.dtu.compute.se.pisd.roborally.view.CardFieldView.OnDragDroppedHandler" target="dk.dtu.compute.se.pisd.roborally.view.CardFieldView" relationship="INNER_CLASS">
+      <point x="1.161478035669461E-4" y="28.49982645655166" />
+      <point x="465.659" y="680.0" />
+      <point x="636.0" y="680.0" />
+      <point x="636.0" y="735.0" />
+      <point x="365.5" y="735.0" />
+      <point x="3.751671175583226" y="-56.49982170102032" />
+    </edge>
+    <edge source="dk.dtu.compute.se.pisd.roborally.view.CardFieldView.OnDragEnteredHandler" target="dk.dtu.compute.se.pisd.roborally.view.CardFieldView" relationship="INNER_CLASS">
+      <point x="4.3446154086268507E-4" y="28.499849386798132" />
+      <point x="1027.522" y="735.0" />
+      <point x="365.5" y="735.0" />
+      <point x="3.751671175583226" y="-56.49982170102032" />
+    </edge>
+    <edge source="dk.dtu.compute.se.pisd.roborally.controller.ConveyorBelt" target="dk.dtu.compute.se.pisd.roborally.controller.FieldAction" relationship="GENERALIZATION">
+      <point x="-3.330088043185242E-4" y="43.499615944509515" />
+      <point x="1648.55" y="588.384" />
+      <point x="2139.0" y="588.384" />
+      <point x="2139.0" y="377.476" />
+      <point x="134.49994262613768" y="1.0601922537034625E-4" />
+    </edge>
+    <edge source="dk.dtu.compute.se.pisd.roborally.model.Board" target="dk.dtu.compute.se.pisd.roborally.model.Space" relationship="TO_MANY">
+      <point x="-122.49950564699634" y="-3.7682555921492167E-4" />
+      <point x="1485.0" y="1196.977" />
+      <point x="1485.0" y="1425.977" />
+      <point x="1944.858" y="1425.977" />
+      <point x="2.6874648938246537E-4" y="169.50013575637502" />
+    </edge>
+    <edge source="dk.dtu.compute.se.pisd.roborally.model.Player" target="dk.dtu.compute.se.pisd.roborally.model.Heading" relationship="TO_ONE">
+      <point x="131.9995254023936" y="2.5526587580770865E-4" />
+      <point x="1484.0" y="573.384" />
+      <point x="1484.0" y="255.12" />
+      <point x="-86.50007611044407" y="3.437906965189086E-4" />
+    </edge>
+    <edge source="dk.dtu.compute.se.pisd.roborally.controller.GameController" target="dk.dtu.compute.se.pisd.roborally.model.Board" relationship="TO_ONE">
+      <point x="1.399011121065996E-4" y="-364.5003999959529" />
+      <point x="1248.801" y="895.0" />
+      <point x="1793.0" y="895.0" />
+      <point x="1793.0" y="1196.977" />
+      <point x="122.50049435300366" y="-3.7682555921492167E-4" />
+    </edge>
+    <edge source="dk.dtu.compute.se.pisd.roborally.view.PlayersView" target="dk.dtu.compute.se.pisd.roborally.view.PlayerView" relationship="TO_MANY">
+      <point x="19.255364445856458" y="-28.5" />
+      <point x="15.0" y="28.5" />
+    </edge>
+    <edge source="dk.dtu.compute.se.pisd.roborally.view.CardFieldView" target="dk.dtu.compute.se.pisd.roborally.controller.GameController" relationship="TO_ONE">
+      <point x="173.99967117558327" y="1.7829897967658326E-4" />
+      <point x="798.0" y="941.01" />
+      <point x="798.0" y="1296.336" />
+      <point x="-187.9998600988879" y="-3.9999595287554257E-4" />
+    </edge>
+    <edge source="dk.dtu.compute.se.pisd.roborally.view.CardFieldView" target="dk.dtu.compute.se.pisd.roborally.view.CardFieldView.OnDragDoneHandler" relationship="CREATE">
+      <point x="-111.81924472372569" y="-56.5" />
+      <point x="0.0" y="28.5" />
+    </edge>
+    <edge source="dk.dtu.compute.se.pisd.roborally.controller.AppController" target="dk.dtu.compute.se.pisd.roborally.controller.GameController" relationship="CREATE">
+      <point x="-82.0" y="0.0" />
+      <point x="188.0" y="353.7549429488379" />
+    </edge>
+    <edge source="dk.dtu.compute.se.pisd.roborally.view.BoardView.SpaceEventHandler" target="dk.dtu.compute.se.pisd.roborally.view.BoardView" relationship="INNER_CLASS">
+      <point x="26.25493976806183" y="28.5" />
+      <point x="0.0" y="-28.5" />
+    </edge>
+    <edge source="dk.dtu.compute.se.pisd.roborally.model.CommandCardField" target="dk.dtu.compute.se.pisd.roborally.model.CommandCard" relationship="TO_ONE">
+      <point x="0.0" y="-42.5" />
+      <point x="1327.681045353808" y="-74.79333746168744" />
+      <point x="2122.764" y="-74.79333746168744" />
+      <point x="15.000427065781878" y="-28.5" />
+    </edge>
+    <edge source="dk.dtu.compute.se.pisd.roborally.view.BoardView.SpaceEventHandler" target="dk.dtu.compute.se.pisd.roborally.controller.GameController" relationship="TO_ONE">
+      <point x="-90.99980747836548" y="-5.382633912631718E-5" />
+      <point x="798.0" y="1756.002" />
+      <point x="798.0" y="1296.336" />
+      <point x="-187.9998600988879" y="-3.9999595287554257E-4" />
+    </edge>
+    <edge source="dk.dtu.compute.se.pisd.roborally.model.Space" target="dk.dtu.compute.se.pisd.roborally.controller.ConveyorBelt" relationship="CREATE">
+      <point x="-108.0" y="-143.8601195095008" />
+      <point x="1663.55" y="678.3837447341242" />
+      <point x="14.999666991195681" y="43.5" />
+    </edge>
+    <edge source="dk.dtu.compute.se.pisd.roborally.controller.AppController" target="dk.dtu.compute.se.pisd.roborally.model.Command" relationship="TO_ONE">
+      <point x="81.99981210140618" y="14.999657055209127" />
+      <point x="2441.604" y="1665.091" />
+      <point x="2441.604" y="295.438" />
+      <point x="1857.5" y="295.438" />
+      <point x="1857.5" y="158.0" />
+      <point x="1989.882" y="158.0" />
+      <point x="2.6010203055193415E-4" y="71.50033746168744" />
+    </edge>
+    <edge source="dk.dtu.compute.se.pisd.roborally.controller.AppController" target="dk.dtu.compute.se.pisd.roborally.model.Board" relationship="TO_ONE">
+      <point x="81.99981210140618" y="-3.429447908729344E-4" />
+      <point x="1793.0" y="1650.091" />
+      <point x="1793.0" y="1196.977" />
+      <point x="122.50049435300366" y="-3.7682555921492167E-4" />
+    </edge>
+    <edge source="dk.dtu.compute.se.pisd.roborally.model.CommandCard" target="dk.dtu.compute.se.pisd.roborally.model.Command" relationship="TO_ONE">
+      <point x="4.270657818779E-4" y="-28.49971577330814" />
+      <point x="2107.764" y="158.0" />
+      <point x="1989.882" y="158.0" />
+      <point x="2.6010203055193415E-4" y="71.50033746168744" />
+    </edge>
+    <edge source="dk.dtu.compute.se.pisd.roborally.view.CardFieldView.OnDragDoneHandler" target="dk.dtu.compute.se.pisd.roborally.view.CardFieldView" relationship="INNER_CLASS">
+      <point x="-8.410069108322205E-5" y="-28.49955630363138" />
+      <point x="249.929" y="680.0" />
+      <point x="636.0" y="680.0" />
+      <point x="636.0" y="735.0" />
+      <point x="365.5" y="735.0" />
+      <point x="3.751671175583226" y="-56.49982170102032" />
+    </edge>
+    <edge source="dk.dtu.compute.se.pisd.roborally.model.Board" target="dk.dtu.compute.se.pisd.roborally.model.Space" relationship="CREATE">
+      <point x="122.5" y="29.999623174440785" />
+      <point x="1929.858" y="1226.977" />
+      <point x="-14.999731253510618" y="169.5" />
+    </edge>
+    <edge source="dk.dtu.compute.se.pisd.roborally.view.BoardView" target="dk.dtu.compute.se.pisd.roborally.view.ViewObserver" relationship="REALIZATION">
+      <point x="2.527535725675989E-4" y="28.499783877132813" />
+      <point x="1391.359" y="2024.905" />
+      <point x="695.0" y="2024.905" />
+      <point x="695.0" y="1434.0" />
+      <point x="158.0" y="1434.0" />
+      <point x="158.0" y="796.5" />
+      <point x="91.50027886558462" y="25.17429683645537" />
+    </edge>
+    <edge source="dk.dtu.compute.se.pisd.roborally.view.PlayerView" target="dk.dtu.compute.se.pisd.roborally.view.CardFieldView" relationship="TO_MANY">
+      <point x="40.50242290739715" y="-28.5" />
+      <point x="15.0" y="56.5" />
+    </edge>
+    <edge source="dk.dtu.compute.se.pisd.roborally.model.Board" target="dk.dtu.compute.se.pisd.roborally.controller.Antenna" relationship="TO_ONE">
+      <point x="-75.3652886848954" y="-211.5" />
+      <point x="1574.198216962101" y="842.9354147857025" />
+      <point x="52.0" y="-0.4526935116001596" />
+    </edge>
+    <edge source="dk.dtu.compute.se.pisd.roborally.controller.Antenna" target="dk.dtu.compute.se.pisd.roborally.model.Board" relationship="TO_ONE">
+      <point x="1.39355419378262E-4" y="12.999891702697369" />
+      <point x="1456.831" y="895.0" />
+      <point x="1793.0" y="895.0" />
+      <point x="1793.0" y="1196.977" />
+      <point x="122.50049435300366" y="-3.7682555921492167E-4" />
+    </edge>
+    <edge source="dk.dtu.compute.se.pisd.roborally.view.SpaceView" target="dk.dtu.compute.se.pisd.roborally.view.ViewObserver" relationship="REALIZATION">
+      <point x="-94.499601256333" y="-2.6212949933324126E-5" />
+      <point x="695.0" y="1908.905" />
+      <point x="695.0" y="1434.0" />
+      <point x="158.0" y="1434.0" />
+      <point x="158.0" y="796.5" />
+      <point x="91.50027886558462" y="25.17429683645537" />
+    </edge>
+    <edge source="dk.dtu.compute.se.pisd.roborally.view.PlayersView" target="dk.dtu.compute.se.pisd.roborally.view.ViewObserver" relationship="REALIZATION">
+      <point x="-91.49954147116316" y="1.223890496930835E-4" />
+      <point x="158.0" y="1216.107" />
+      <point x="158.0" y="796.5" />
+      <point x="91.50027886558462" y="25.17429683645537" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Compact" zoom="1.0651344476744187" showDependencies="true" x="1426.6362046908296" y="1345.048443496816" />
+  <SelectedNodes>
+    <node>dk.dtu.compute.se.pisd.roborally.controller.GameController</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Inner Classes</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
